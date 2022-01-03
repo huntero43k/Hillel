@@ -1,1 +1,1 @@
-# Hillel
+# Hillel - Study Project
