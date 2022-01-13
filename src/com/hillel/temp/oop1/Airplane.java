@@ -3,13 +3,15 @@ package com.hillel.temp.oop1;
 import java.util.Scanner;
 
 public class Airplane {
-    private String model;       // модель самолета
-    private String type;        // тип (пасажирский/грузовой)
-    private boolean engineOn;     // состояние двигателя (вкл/выкл)
+    private String name;            // модель самолета
+    private String engineState;     // состояние двигателя (ON or OFF)
+    private boolean takeOffState;   // возможность взлететь
+    private boolean landState;      // возможность приземлиться
+    private int currentHeight;      // текущая высота
     private int capacity;       // вместимость (число мест)
     //private int cruisingSpeed;  // крейсерская скорость (средне-оптимальная скорость полета км/час)
     final private int minFlyHeight = 500;   // минимальная высота полета (500м)
-    final private int maxFlyHeight = 8000;   // максимальная высота полета (8000м)
+    final private int maxFlyHeight = 8000;  // максимальная высота полета (8000м)
     //private double tankVolume;  // обьем бака (литров)
     //private double fuelInTank;  // к-во топлива в баке (литров)
     //private double flightRange; // дальность полета
@@ -19,50 +21,60 @@ public class Airplane {
 //        this.type = "Passenger";
 //    }
 
-    void setEngineOn() {
-        engineOn = true;
-        System.out.println("Двигатель включен!\n" + "Пристегните ремни безопасности, переведите столики перед вами " +
-                "и спинку Вашего кресла в вертикальное положении во время взлёта.\n");
+    //functions
+    public void start() {
+        if (this.engineState == "ON") {
+            System.out.println("Engine is already ON");
+        } else {
+            this.setEngineState("ON");
+            System.out.println("Engine ON!\n" + "Please fasten your seatbelts,put your seats and table trays " +
+                    "are in the upright position for take-off.");
+            System.out.println("----------------------------------------");
+        }
     }
 
-    void setEngineOff() {
+    public void stop() {
+        if (this.engineState == "OFF") {
+            System.out.println("Engine is already OFF");
+        } else {
+            this.setEngineState("OFF");
+        }
         //выдать ошибку, если кто-то пытаеться выключить двигатель в полете
         //метод можно вызвать только когда самолет приземлился
-        engineOn = true;
-        System.out.println("Двинатель выключен, любые методы запрещены");
+        //engineOn = true;
+        //System.out.println("Двинатель выключен, любые методы запрещены");
     }
     // взлететь
-    void takeOff() {
-        if (engineOn == true) {
-            System.out.println("Взлетамем!");
-
+    public void takeOff() {
+        if (this.engineState == "ON") {
+            setTakeOffAbility(true);
+            System.out.println("The plane is taking off! ^^^^^^^^");
+            System.out.println("----------------------------------------");
+            System.out.println("Good job!\n" + "We have switched to flight mode.\n" +
+                    "In this mode, we can gain and decrease the flight altitude" +
+                    " in the range of 500m (min) up to 8000m (max)\n");
+            System.out.println("--------------------------------------------------");
         }
         else {
-            System.out.println("Двигатель включен,");
+            System.out.println("The engine is OFF, it is impossible to take off =( Please turn ON engine\n");
         }
     }
-    void fly() {
-        System.out.println("Мы перешли в режим полета.\n" + "В данном режиме мы можем набирать и снижать высоту" +
-                " самолета в пределах от 500м. до 8000м.\n");
-        int currentHeight = minFlyHeight;
+    //
+    public void fly() {
+        setCurrentHeight(minFlyHeight);
         Scanner scanner = new Scanner(System.in);
-
-        if (minFlyHeight >= 500 && maxFlyHeight <= 8000) {
-            System.out.println("Введите желаемую высоту полета >= 500 && <=8000");
-            if (scanner.hasNextInt()) {
+        if (getTakeOffStateAbility() == true) {
+            setLandState(true);
+            System.out.println("Please chose your flight high:");
+            while (currentHeight >= minFlyHeight && currentHeight <= maxFlyHeight) {
                 currentHeight = scanner.nextInt();
+                System.out.println("Current height is: " + currentHeight);
+            } if (currentHeight < minFlyHeight && currentHeight > maxFlyHeight && currentHeight != 0) {
+                System.out.println("Out of fly range!\n" + "If you want to land, please input 0");
+                fly();
+            } if (scanner.nextInt() == 0) {
+                land();
             }
-            if (currentHeight < minFlyHeight || currentHeight > maxFlyHeight) {
-                System.out.println("Вы ввели недопустимую высоту, желаете приземлиться? [Y/N]\n");
-                String choice = scanner.nextLine();
-                if (choice.equalsIgnoreCase("y")) {
-                    land();
-                    }
-                }
-//            else {
-//                System.out.println("Вы совершили ошибку, попробуйте еще раз!");
-//                currentHeight = scanner.nextInt();
-//            }
         }
 
 
@@ -79,6 +91,40 @@ public class Airplane {
     void land() {
         System.out.println("Hello!");
         return;
+    }
+
+    //getters and setters
+
+    public String getEngineState() {
+        return engineState;
+    }
+
+    public void setEngineState(String engineState) {
+        this.engineState = engineState;
+    }
+
+    public boolean getTakeOffStateAbility() {
+        return takeOffState;
+    }
+
+    public void setTakeOffAbility(boolean takeOffState) {
+        this.takeOffState = takeOffState;
+    }
+
+    public int getCurrentHeight() {
+        return currentHeight;
+    }
+
+    public void setCurrentHeight(int currentHeight) {
+        this.currentHeight = currentHeight;
+    }
+
+    public boolean getLandState() {
+        return landState;
+    }
+
+    public void setLandState(boolean landState) {
+        this.landState = landState;
     }
 
 }

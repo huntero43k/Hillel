@@ -2,8 +2,9 @@ package com.hillel.temp.oop1;
 
 public class Main {
     public static void main(String[] args) {
-        Airplane airplane = new Airplane();
-        airplane.setEngineOn();
-        airplane.fly();
+        Airplane tyIbrahim = new Airplane();
+        tyIbrahim.start();
+        tyIbrahim.takeOff();
+        tyIbrahim.fly();
     }
 }
