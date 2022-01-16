@@ -5,7 +5,7 @@ public class Airplane {
     private String engineState;     // состояние двигателя (ON or OFF)
     private boolean takeOffState;   // возможность взлететь
     private boolean landState;      // возможность приземлиться
-    private boolean flyModeState;        // разрешение изменения высоты в пределах х-ик самолета
+    private boolean flyModeState;   // разрешение изменения высоты в пределах х-ик самолета
     private int currentHeight;      // текущая высота
     final private int minFlyHeight; // минимальная высота полета (500м)
     final private int maxFlyHeight; // максимальная высота полета (8000м)
