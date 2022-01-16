@@ -9,10 +9,14 @@ public class MainT {
 //        double b = 0;
 //
 //        System.out.println(a / b);
-        long a = 1234567890;
-        float b = a;
-        double c = a;
-        System.out.println(b);
+//        long a = 1234567890;
+//        float b = a;
+//        double c = a;
+//        System.out.println(b);
+//        System.out.println(c);
+        int a = 3;
+        int b = 2;
+        int c = a / b;
         System.out.println(c);
     }
 }

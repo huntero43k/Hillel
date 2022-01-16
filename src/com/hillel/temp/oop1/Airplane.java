@@ -64,7 +64,7 @@ public class Airplane {
         }
     }
 
-    // изменение высоты полета
+    // изменить высоту полета
     public int changeCurrentHeight(int currentHeight) {
         if (currentHeight >= minFlyHeight && currentHeight <= maxFlyHeight && flyModeState == true) {
             setCurrentHeight(currentHeight);

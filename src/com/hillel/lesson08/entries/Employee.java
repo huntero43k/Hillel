@@ -1,6 +1,6 @@
 package com.hillel.lesson08.entries;
 
-public class Employee {
+public abstract class Employee {
     String name;
     String lastName;
     String dayOfBirth;
@@ -16,4 +16,7 @@ public class Employee {
     Employee(String name, String lastName, String dayOfBirth) {
         this (name, lastName,dayOfBirth, 0);
     }
+
+    //abstract void salaryReview(double newSalary)
+
 }
