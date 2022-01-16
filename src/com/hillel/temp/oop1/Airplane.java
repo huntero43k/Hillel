@@ -1,7 +1,7 @@
 package com.hillel.temp.oop1;
 
 public class Airplane {
-    private String name;            // модель самолета
+    private String name;            // имя самолета
     private String engineState;     // состояние двигателя (ON or OFF)
     private boolean takeOffState;   // возможность взлететь
     private boolean landState;      // возможность приземлиться
