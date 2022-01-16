@@ -1,15 +1,14 @@
 package com.hillel.temp.oop1;
 
-import java.util.Scanner;
-
 public class Airplane {
     private String name;            // модель самолета
     private String engineState;     // состояние двигателя (ON or OFF)
     private boolean takeOffState;   // возможность взлететь
     private boolean landState;      // возможность приземлиться
+    private boolean flyModeState;        // разрешение изменения высоты в пределах х-ик самолета
     private int currentHeight;      // текущая высота
-    final private int minFlyHeight;   // минимальная высота полета (500м)
-    final private int maxFlyHeight;  // максимальная высота полета (8000м)
+    final private int minFlyHeight; // минимальная высота полета (500м)
+    final private int maxFlyHeight; // максимальная высота полета (8000м)
 
     Airplane(String name) {
         this.name = name;
@@ -17,6 +16,7 @@ public class Airplane {
         this.maxFlyHeight = 8000;
         setEngineState("OFF");
         setTakeOffState(false);
+        setFlyModeState(false);
         setLandState(false);
         setCurrentHeight(0);
     }
@@ -29,13 +29,15 @@ public class Airplane {
             System.out.println("Engine is already ON!");
         } else {
             this.setEngineState("ON");
+            setTakeOffState(true);
         }
     }
+
     // выключение двигателя
     public void stop() {
         if (this.engineState.equals("OFF")) {
             System.out.println("Engine is already OFF!");
-        } else if (this.engineState.equals("ON") && takeOffState == true) {
+        } else if (this.engineState.equals("ON") && flyModeState == true) {
             try {
                 throw new Exception("Attempt to turn off the engine resulted in an ERROR!");
             } catch (Exception e) {
@@ -45,44 +47,28 @@ public class Airplane {
         }
         else {
             setEngineState("OFF");
+            setTakeOffState(false);
         }
     }
 
     // взлететь
     public void takeOff() {
         if (this.engineState.equals("ON")) {
-            setTakeOffState(true);
             setCurrentHeight(minFlyHeight);
+            setFlyModeState(true);
+            setLandState(true);
+            setTakeOffState(false);
         }
         else {
             System.out.println("The engine is OFF, it is impossible to take off =( Please turn ON engine\n");
         }
     }
-    //
-//    public void fly() {
-//        setCurrentHeight(minFlyHeight);
-//        Scanner scanner = new Scanner(System.in);
-//        if (takeOffState == true) {
-//            setLandState(true);
-//            System.out.println("Please chose your flight high:");
-//            while (currentHeight >= minFlyHeight && currentHeight <= maxFlyHeight) {
-//                System.out.println("Current height is: " + currentHeight + "\n" + "Please input new height: ");
-//                currentHeight = scanner.nextInt();
-//            } if (currentHeight < minFlyHeight && currentHeight > maxFlyHeight && currentHeight != 0) {
-//                System.out.println("Out of fly range!\n" + "If you want to land, please input 0");
-//                fly();
-//            } if (scanner.nextInt() == 0) {
-//                land();
-//            }
-//        }
-//    }
 
     // изменение высоты полета
     public int changeCurrentHeight(int currentHeight) {
-        if (currentHeight >= minFlyHeight && currentHeight <= maxFlyHeight) {
+        if (currentHeight >= minFlyHeight && currentHeight <= maxFlyHeight && flyModeState == true) {
             setCurrentHeight(currentHeight);
         } else {
-            System.out.println("");
             try {
                 throw new Exception("Entered value out of range || min 500 - 8000 max ||");
             } catch (Exception e) {
@@ -92,10 +78,12 @@ public class Airplane {
         }
         return currentHeight;
     }
-
-    void land() {
-        if (this.currentHeight > 0) {
-
+    // приземлиться
+    public void land() {
+        if (this.currentHeight > 0 && this.landState == true) {
+        setCurrentHeight(0);
+        setFlyModeState(false);
+        setTakeOffState(true);
         }
 
     }
@@ -122,6 +110,14 @@ public class Airplane {
         this.takeOffState = takeOffState;
     }
 
+    public boolean getFlyModeState() {
+        return flyModeState;
+    }
+
+    private void setFlyModeState(boolean flyModeState) {
+        this.flyModeState = flyModeState;
+    }
+
     public int getCurrentHeight() {
         return currentHeight;
     }
@@ -138,12 +134,14 @@ public class Airplane {
         this.landState = landState;
     }
 
-    public void getMinFlyHeight() {
-        System.out.println(minFlyHeight);
+    public int getMinFlyHeight() {
+        int minFlyHeight = this.minFlyHeight;
+        return minFlyHeight;
     }
 
-    public void getMaxFlyHeight() {
-        System.out.println(maxFlyHeight);
+    public int getMaxFlyHeight() {
+        int maxFlyHeight = this.maxFlyHeight;
+        return maxFlyHeight;
     }
 
 }
