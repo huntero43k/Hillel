@@ -1,4 +1,4 @@
-package com.hillel.lesson06.DaysCalc;
+package com.hillel.temp.DaysCalc;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
