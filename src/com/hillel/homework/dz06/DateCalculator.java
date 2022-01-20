@@ -5,7 +5,7 @@ public class DateCalculator {
     static int [] daysInAMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     // Count a number of leap years before given date
-    static int countLeapYears(Date date) {
+    public static int countLeapYears(Date date) {
         int years = date.y;
 
         if (date.m <= 2)        // check if current input date not bigger for month 2
@@ -16,7 +16,7 @@ public class DateCalculator {
     }
 
     // calculate difference between two dates
-    static int calculateNumberOfDaysBetweenTwoDate(Date date1, Date date2) {
+    public static int calculateNumberOfDaysBetweenTwoDate(Date date1, Date date2) {
         // count all days of date1
         int x1 = date1.y * 365 + date1.d;
         for (int i = 0; i < date1.m - 1; i++) {
@@ -32,6 +32,11 @@ public class DateCalculator {
         x2 += countLeapYears(date2); // add all leap days
 
         //return a difference
-        return x2 - x1;
+        if (x2 > x1) {
+            return x2 - x1;
+        } else {
+            return x1 - x2;
+        }
+
     }
 }
