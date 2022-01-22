@@ -1,4 +1,4 @@
-package com.hillel.homework.dz06;
+package com.hillel.temp.dz06_no_date_check;
 
 public class Date {
     // Date has day 'd', month 'm' and year 'y'

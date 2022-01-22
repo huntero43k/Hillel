@@ -1,4 +1,5 @@
 package com.hillel.temp.tempDZ.dz06_test;
+import java.time.LocalDate;
 
 public class Date {
     int d;
@@ -10,4 +11,9 @@ public class Date {
         this.m = m;
         this.y = y;
     }
+
+    public static void toString(Date date) {
+        System.out.println(date.d + "/" + date.m + "/" + date.y);
+    }
+
 }

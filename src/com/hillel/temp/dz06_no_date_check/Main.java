@@ -1,4 +1,4 @@
-package com.hillel.homework.dz06;
+package com.hillel.temp.dz06_no_date_check;
 
 import java.util.Scanner;
 
