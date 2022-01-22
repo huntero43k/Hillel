@@ -12,13 +12,13 @@ public class Date {
         this.y = y;
     }
 
-    // check is year is a leap
+    // check if a year is a leap year
     static boolean isLeapYear (Date date) {
-        if (date.y % 400 == 0) {        // if year is divisible by 400 then it is leap year
+        if (date.y % 400 == 0) {            // if year is divisible by 400 then it is leap year
             return true;
-        } else if (date.y % 100 == 0) { // if year is not divisible by 400 but divisible by 100 then it is not a leap year
+        } else if (date.y % 100 == 0) {     // if year is not divisible by 400 but divisible by 100 then it is not a leap year
             return false;
-        } else if (date.y % 4 == 0) {   // in all cases if year is divisible by 4 it is a leap year
+        } else if (date.y % 4 == 0) {       // in all cases if year is divisible by 4 it is a leap year
             return true;
         }
         return false;
@@ -30,8 +30,7 @@ public class Date {
             return false;
         } else if (date.m == 2 && !isLeapYear(date) && date.d <= 28) {  // if not leap year February have 28 days
             return true;
-        }
-        else if (date.m == 2 && isLeapYear(date) && date.d <= 29) {     // if leap year February have 29 days
+        } else if (date.m == 2 && isLeapYear(date) && date.d <= 29) {   // if leap year February have 29 days
             return true;
         } else if (date.d <= daysInMonth[date.m - 1]){
             return true;
