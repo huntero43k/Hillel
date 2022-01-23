@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int temp = 0;
+        int max = 0;
         while (true) {
             int x = scanner.nextInt();
-            if (x > temp) {
-                temp = x;
+            if (x > max) {
+                max = x;
             } else if (x == 0) {
                 break;
             }
         }
-        System.out.println(temp);
+        System.out.println(max);
     }
 }
