@@ -32,7 +32,7 @@ public class Date {
             return true;
         } else if (date.m == 2 && isLeapYear(date) && date.d <= 29) {   // if leap year February have 29 days
             return true;
-        } else if (date.d <= daysInMonth[date.m - 1]){
+        } else if (date.d <= daysInMonth[date.m - 1]) {
             return true;
         }
         return false;
