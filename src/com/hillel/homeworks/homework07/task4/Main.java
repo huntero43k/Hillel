@@ -5,15 +5,17 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NOT READY !!!!!!!!!!!!!!!!!!!!!!!!!!
         int max = 0;
         int max2 = 0;
+        int temp;
         while (true) {
-            int x = scanner.nextInt(); // need to check with 2 3 5 4 2 1 8 0
-            if (x > max) {
-                max = x;
-            } else if (max2 <= x) {
+            int x = scanner.nextInt();
+            if (x >= max2) {
                 max2 = x;
+            } if (max2 > max) {
+                temp = max;
+                max = max2;
+                max2 = temp;
             } else if (x == 0) {
                 break;
             }
