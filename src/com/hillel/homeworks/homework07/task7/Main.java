@@ -1,24 +1,30 @@
 package com.hillel.homeworks.homework07.task7;
-// делал не сам, нашел подсказки
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double a = scanner.nextDouble();
-        double b = scanner.nextDouble();
-        double c = scanner.nextDouble();
+        double a, b, c;
+        double D;
+        a = scanner.nextDouble();
+        b = scanner.nextDouble();
+        c = scanner.nextDouble();
 
-        double b1 = b / a;          //x^2-x-2=0
-        double c1 = c / a;          //(x-1/2)^2-2-1/4=0
-        double b2 = b1 / 2;         //(x-0.5)=2.25
-        double c2 = -c1 + b2 * b2;  //x-0.5=+-1.5
-        if (c2 == 0) {
-            System.out.println(-b2);
-        } else {
-            if (c2 > 0) {
-                System.out.println((-Math.sqrt(c2)-b2) + " " + (Math.sqrt(c2)-b2));
-            }
+        D = b * b - 4 * a * c;
+        if (D > 0) {
+            double x1, x2;
+            x1 = (-b - Math.sqrt(D)) / (2 * a);
+            x2 = (-b + Math.sqrt(D)) / (2 * a);
+            System.out.println("2 " + (int)x1 + " " + (int)x2);
+        }
+        else if (D == 0) {
+            double x;
+            x = -b / (2 * a);
+            System.out.println("1 " + (int)x);
+        }
+        else {
+            System.out.println("0");
         }
     }
 }

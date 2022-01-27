@@ -1,5 +1,5 @@
 package com.hillel.homeworks.homework07.task6;
-// делал не сам, нашел подсказки
+
 import java.util.Scanner;
 
 public class Main {
