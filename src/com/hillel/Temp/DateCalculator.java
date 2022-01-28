@@ -1,11 +1,13 @@
 package com.hillel.Temp;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 
 public class DateCalculator {
 
-     public static long calculateNumberOfDaysBetweenTwoDate(Temporal date1, Temporal date2) {
+     public static long calculateNumberOfDaysBetweenTwoDate(Date firstDate, Date secondDate) {
+         LocalDate date1 = Date.format(firstDate.date);
+         LocalDate date2 = Date.format(secondDate.date);
          long days = ChronoUnit.DAYS.between(date1, date2);
          return days;
      }
