@@ -4,13 +4,14 @@ public class DateCalc {
 
     // function that counts difference between two dates
     static int calcDaysBetweenTwoDate (Date date1, Date date2) {
-        if (!Date.isValidDate(date1) || !Date.isValidDate(date2)) {
-            try {
-                throw new Exception("The entered DATE does NOT EXIST!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            } System.exit(0);                 // throw exception and exit program if date is incorrect
-        }
+//        if (!Date.isValidDate(date1) || !Date.isValidDate(date2)) {
+//            try {
+//                throw new Exception("The entered DATE does NOT EXIST!");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            } System.exit(0);                 // throw exception and exit program if date is incorrect
+//        }
+
         int x1 = date1.y * 365 + date1.d;           // sum daysInYears + days
 
         for (int i = 0; i < date1.m - 1; i++) {     // sum x1 + daysInMoths
@@ -48,9 +49,8 @@ public class DateCalc {
     }
 
     // calculate Age (returns years quantity)
-    static int calcAge (Date dateOfBirth) {
-        int days = DateCalc.calcDaysBetweenTwoDate(dateOfBirth,Date.today);
-        return days / 365;
+    static int getAge (Date dateOfBirth) {
+        return (DateCalc.calcDaysBetweenTwoDate(dateOfBirth,Date.today)) / 365;
     }
 
 }

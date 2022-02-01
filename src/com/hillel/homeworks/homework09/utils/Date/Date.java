@@ -35,14 +35,7 @@ public class Date {
 
     // check if a year is a leap year
     static boolean isLeapYear (Date date) {
-        if (date.y % 400 == 0) {            // if year is divisible by 400 then it is leap year
-            return true;
-        } else if (date.y % 100 == 0) {     // if year is not divisible by 400 but divisible by 100 then it is not a leap year
-            return false;
-        } else if (date.y % 4 == 0) {       // in all cases if year is divisible by 4 it is a leap year
-            return true;
-        }
-        return false;
+        return  date.y % 400 == 0 || (date.y % 4 == 0 && date.y % 100 != 0);
     }
 
     // check if date is exists
