@@ -20,18 +20,12 @@ public class Date {
         this.y = y;
     }
 
-    // print date in EU format
+    // print date
     public static void printDate(Date date) {
-        if (date.d < 10 && date.m < 10) {
-            System.out.println("0" + date.d + "." + "0" + date.m + "." + date.y);
-        } else if (date.d < 10) {
-            System.out.println("0" + date.d + "." + date.m + "." + date.y);
-        } else if (date.m < 10) {
-            System.out.println(date.d + "." + "0" + date.m + "." + date.y);
-        } else {
             System.out.println(date.d + "." + date.m + "." + date.y);
-        }
     }
+
+
 
     // check if a year is a leap year
     static boolean isLeapYear (Date date) {
@@ -40,13 +34,13 @@ public class Date {
 
     // check if date is exists
     static boolean isValidDate (Date date) {
-        if (date.d < 1 || date.m < 1 || date.y < 1 || date.m > 12) {    // date range input test
+        if (date.d < 1 || date.m < 1 || date.y < 1 || date.m > 12) {    // out of range date check
             return false;
         } else if (date.m == 2 && !isLeapYear(date) && date.d <= 28) {  // if not leap year February have 28 days
             return true;
         } else if (date.m == 2 && isLeapYear(date) && date.d <= 29) {   // if leap year February have 29 days
             return true;
-        } else if (date.d <= daysInMonth[date.m - 1]) {
+        } else if (date.d <= daysInMonth[date.m - 1]) {                 // all other dates in month check
             return true;
         }
         return false;
