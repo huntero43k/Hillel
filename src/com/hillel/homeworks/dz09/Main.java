@@ -1,7 +1,12 @@
 package com.hillel.homeworks.dz09;
 
 import com.hillel.homeworks.dz09.entries.Employee;
+import com.hillel.homeworks.dz09.entries.HourlyEmployee;
+import com.hillel.homeworks.dz09.entries.Manager;
+import com.hillel.homeworks.dz09.entries.SalaryEmployee;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,22 +27,113 @@ public class Main {
             System.out.println("Enter Your Choice: ");
             int option = SCANNER_INT.nextInt();
             switch (Option.of(option)) {
-                case CREATE -> {
-                    System.out.print("Enter Employee name: ");
-                    String name = SCANNER_STR.nextLine();
-                    System.out.print("Enter Employee lastname: ");
-                    String lastname = SCANNER_STR.nextLine();
-                    System.out.print("Enter Employee dayOfBirth dd/MM/yyyy: ");
-                    String dayOfBirth = SCANNER_STR.nextLine();
-                    System.out.print("Enter Employee hiringDate dd/MM/yyyy: ");
-                    //EMPLOYEE_LIST.add(new Employee(name,lastname,));
+                case CREATE -> createEmployee();
+                case DISPLAY -> displayEmployee();
+                case SEARCH -> searchEmployee();
+                case EDIT -> editEmployee();
+                case DELETE -> deleteEmployee();
+                case EXIT -> exit = true;
+            }
+        }
+    }
+
+    //create HourlyEmployee
+    public static void createEmployee() {
+        System.out.println("Select Employee Type: ");
+        for (EmployeeType value: EmployeeType.values()) {
+            System.out.println("\t" + value.name());
+            }
+        int option = SCANNER_INT.nextInt();
+        switch (EmployeeType.of(option)) {
+            case HOURLY_EMPLOYEE -> {
+                System.out.print("Enter HourlyEmployee name: ");
+                String name = SCANNER_STR.nextLine();
+                System.out.print("Enter HourlyEmployee lastname: ");
+                String lastname = SCANNER_STR.nextLine();
+                System.out.print("Enter HourlyEmployee dayOfBirth dd/MM/yyyy: ");
+                String dayOfBirth = SCANNER_STR.nextLine();
+                System.out.print("Enter HourlyEmployee hiringDate dd/MM/yyyy: ");
+                String hiringDate = SCANNER_STR.nextLine();
+                EMPLOYEE_LIST.add(new HourlyEmployee(name, lastname,dayOfBirth,hiringDate));
+                break;
                 }
-                case DISPLAY -> {
-                    System.out.println(EMPLOYEE_LIST);
+            case SALARY_EMPLOYEE -> {
+                System.out.print("Enter SalaryEmployee name: ");
+                String name = SCANNER_STR.nextLine();
+                System.out.print("Enter SalaryEmployee lastname: ");
+                String lastname = SCANNER_STR.nextLine();
+                System.out.print("Enter SalaryEmployee dayOfBirth dd/MM/yyyy: ");
+                String dayOfBirth = SCANNER_STR.nextLine();
+                System.out.print("Enter SalaryEmployee hiringDate dd/MM/yyyy: ");
+                String hiringDate = SCANNER_STR.nextLine();
+                EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname,dayOfBirth,hiringDate));
+                break;
                 }
+            case MANAGER -> {
+                System.out.print("Enter Manager name: ");
+                String name = SCANNER_STR.nextLine();
+                System.out.print("Enter Manager lastname: ");
+                String lastname = SCANNER_STR.nextLine();
+                System.out.print("Enter Manager dayOfBirth dd/MM/yyyy: ");
+                String dayOfBirth = SCANNER_STR.nextLine();
+                System.out.print("Enter Manager hiringDate dd/MM/yyyy: ");
+                String hiringDate = SCANNER_STR.nextLine();
+                EMPLOYEE_LIST.add(new Manager(name, lastname,dayOfBirth,hiringDate));
+                break;
+                }
+            default -> System.out.println("Sorry, option not found!");
             }
         }
 
+    // display employees
+    public static void displayEmployee() {
+        System.out.println("----------------------------------------");
+        Iterator<Employee> i = EMPLOYEE_LIST.iterator();
+        while (i.hasNext()) {
+            Employee employee = i.next();{
+                System.out.println(employee);
+            }
+        }
+        System.out.println("----------------------------------------");
+    }
+
+    // search employees
+    public static void searchEmployee() {
+        //some search code
+    }
+
+    // edit employee
+    public static void editEmployee() {
+        //some edit employee code
+    }
+
+    // delete employee
+    public static void deleteEmployee() {
+        //some delete employee code
+    }
+
+}
+
+    // create employee types
+    enum EmployeeType {
+        HOURLY_EMPLOYEE(1),
+        SALARY_EMPLOYEE(2),
+        MANAGER(3),
+        ;
+        private final int value;
+
+        EmployeeType(int value) {
+            this.value = value;
+        }
+
+        public static EmployeeType of(int value) {
+            for (EmployeeType option : values()) {
+                if (option.value == value) {
+                    return option;
+                }
+            }
+            throw new IllegalArgumentException("Option with selected value=" + value + " not found");
+        }
     }
 
     // create menu list with value id
@@ -64,4 +160,3 @@ public class Main {
             throw new IllegalArgumentException("Option with selected value=" + value + " not found");
         }
     }
-}

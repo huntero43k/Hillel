@@ -1,6 +1,9 @@
 package com.hillel.homeworks.dz09.entries;
 
-public class Employee {
+import com.hillel.homeworks.dz09.utils.Date;
+import com.hillel.homeworks.dz09.utils.DateCalc;
+
+abstract public class Employee {
     private final String name;
     private final String lastname;
     String dayOfBirth;

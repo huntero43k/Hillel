@@ -1,6 +1,6 @@
 package com.hillel.homeworks.dz09.utils;
 
-public class DateCalculator {
+public class DateCalc {
 
     // sum of all leap days before input date
     static public int calcLeapDaysSum(Date date) {
@@ -19,7 +19,7 @@ public class DateCalculator {
     }
 
     // method counts difference between two dates
-    static int calculateNumberOfDaysBetweenTwoDate (Date date1, Date date2) {
+    static int calcDaysBetweenTwoDate (Date date1, Date date2) {
         if (!Date.isValidDate(date1) || !Date.isValidDate(date2)) {
             try {
                 throw new Exception("The entered DATE does NOT EXIST!");
@@ -49,12 +49,12 @@ public class DateCalculator {
 
     // calculate Age (returns years quantity)
     static int getAge (Date dateOfBirth) {
-        return (DateCalculator.calculateNumberOfDaysBetweenTwoDate(dateOfBirth, Date.today)) / 365;
+        return (calcDaysBetweenTwoDate(dateOfBirth, Date.today)) / 365;
     }
 
     // calculate holidays 30 days per year || 32 days per year if age is 50
     public static int calcHolidays(Date hiringDate) {
-        return (calculateNumberOfDaysBetweenTwoDate(hiringDate, Date.today)) / 12;
+        return (calcDaysBetweenTwoDate(hiringDate, Date.today)) / 12;
     }
 
 }

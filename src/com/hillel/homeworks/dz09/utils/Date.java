@@ -8,12 +8,13 @@ public class Date {
     final public int y;     // year
 
     // number of days in each month
-    final static int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    final public static int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-    // dynamic today's date
-    final static Date today = new Date(LocalDate.now().getDayOfYear(),
+    // dynamic today's Date
+    final public static Date today = new Date(LocalDate.now().getDayOfMonth(),
                                        LocalDate.now().getMonthValue(),
                                        LocalDate.now().getYear());
+
     // int constructor
     Date(int d, int m, int y) {
         this.d = d;
