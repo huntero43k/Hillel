@@ -1,6 +1,10 @@
 .idea
 HILLEL.iml
 /src/com/hillel/test
+/src/com/hillel/Test
+/src/com/hillel/_Test
 /src/com/hillel/temp
+/src/com/hillel/Temp
+/src/com/hillel/_Temp
 /out
 /_out

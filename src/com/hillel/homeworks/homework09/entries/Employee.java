@@ -8,6 +8,7 @@ public abstract class Employee {
     Date dayOfBirth;
     Date hiringDate;
     int holidaysAlreadyTaken;
+    final private int holidaysCount = 0;
 
     Employee(String name, String lastname, Date dayOfBirth, Date hiringDate,int holidaysAlreadyTaken) {
         this.name = name;
@@ -17,8 +18,15 @@ public abstract class Employee {
         this.holidaysAlreadyTaken = holidaysAlreadyTaken;
     }
 
+
     Employee(String name, String lastname, Date dayOfBirth, Date hiringDate) {
         this(name, lastname, dayOfBirth, hiringDate,0);
+    }
+
+     Employee(String name, String lastname, Date hiringDate) {
+        this.name = name;
+        this.lastname = lastname;
+        this.hiringDate = hiringDate;
     }
 
 

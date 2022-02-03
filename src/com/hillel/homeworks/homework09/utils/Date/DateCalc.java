@@ -53,4 +53,9 @@ public class DateCalc {
         return (DateCalc.calcDaysBetweenTwoDate(dateOfBirth,Date.today)) / 365;
     }
 
+    // calculate holidays 30 days per year || 32 days per year if age is 50
+    static int calcHolidays(Date hiringDate, Date age) {
+        return (calcDaysBetweenTwoDate(hiringDate, Date.today)) / 12;
+    }
+
 }

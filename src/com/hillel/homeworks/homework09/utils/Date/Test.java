@@ -7,7 +7,7 @@ public class Test {
 
         System.out.println(Date.isLeapYear(dayOfBirth));
 
-        Date.printDate(dayOfBirth);
+        //Date.printDate(dayOfBirth);
         System.out.println(Date.isValidDate(dayOfBirth));
         System.out.println(DateCalc.calcDaysBetweenTwoDate(dayOfBirth, today));
         System.out.println(DateCalc.getAge(dayOfBirth));
