@@ -12,18 +12,18 @@ public class Date {
 
     // dynamic today's Date
     final public static Date today = new Date(LocalDate.now().getDayOfMonth(),
-                                       LocalDate.now().getMonthValue(),
-                                       LocalDate.now().getYear());
+                                            LocalDate.now().getMonthValue(),
+                                            LocalDate.now().getYear());
 
     // int constructor
-    Date(int d, int m, int y) {
+    public Date(int d, int m, int y) {
         this.d = d;
         this.m = m;
         this.y = y;
     }
 
     // String constructor
-    Date(String date){
+    public Date(String date){
         String[] values = date.split("/");
         this.d = Integer.parseInt(values[0]);
         this.m = Integer.parseInt(values[1]);

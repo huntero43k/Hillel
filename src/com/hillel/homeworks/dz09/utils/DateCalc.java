@@ -3,7 +3,7 @@ package com.hillel.homeworks.dz09.utils;
 public class DateCalc {
 
     // sum of all leap days before input date
-    static public int calcLeapDaysSum(Date date) {
+    static int calcLeapDaysSum(Date date) {
         int leapDays = 0;
         int tempYear = date.y;
         if (date.m <= 2) {          // check if current input date not bigger for month 2 (leap day include chance)
@@ -19,7 +19,7 @@ public class DateCalc {
     }
 
     // method counts difference between two dates
-    static int calcDaysBetweenTwoDate (Date date1, Date date2) {
+    public static int calcDaysBetweenTwoDate (Date date1, Date date2) {
         if (!Date.isValidDate(date1) || !Date.isValidDate(date2)) {
             try {
                 throw new Exception("The entered DATE does NOT EXIST!");
@@ -46,15 +46,4 @@ public class DateCalc {
             return x2 - x1;
         }
     }
-
-    // calculate Age (returns years quantity)
-    static int getAge (Date dateOfBirth) {
-        return (calcDaysBetweenTwoDate(dateOfBirth, Date.today)) / 365;
-    }
-
-    // calculate holidays 30 days per year || 32 days per year if age is 50
-    public static int calcHolidays(Date hiringDate) {
-        return (calcDaysBetweenTwoDate(hiringDate, Date.today)) / 12;
-    }
-
 }

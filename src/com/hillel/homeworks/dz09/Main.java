@@ -4,11 +4,9 @@ import com.hillel.homeworks.dz09.entries.Employee;
 import com.hillel.homeworks.dz09.entries.HourlyEmployee;
 import com.hillel.homeworks.dz09.entries.Manager;
 import com.hillel.homeworks.dz09.entries.SalaryEmployee;
+import com.hillel.homeworks.dz09.utils.Date;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static List<Employee> EMPLOYEE_LIST = new ArrayList<>();
@@ -50,10 +48,11 @@ public class Main {
                 String name = SCANNER_STR.nextLine();
                 System.out.print("Enter HourlyEmployee lastname: ");
                 String lastname = SCANNER_STR.nextLine();
-                System.out.print("Enter HourlyEmployee dayOfBirth dd/MM/yyyy: ");
-                String dayOfBirth = SCANNER_STR.nextLine();
+                System.out.print("Enter hourlyEmployee dayOfBirth dd/MM/yyyy: ");
+                Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
+                //Date dayOfBirth1 = new Date(SCANNER_INT.nextLine().trim().replace("\n", "."));
                 System.out.print("Enter HourlyEmployee hiringDate dd/MM/yyyy: ");
-                String hiringDate = SCANNER_STR.nextLine();
+                Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
                 EMPLOYEE_LIST.add(new HourlyEmployee(name, lastname,dayOfBirth,hiringDate));
                 break;
                 }
@@ -63,10 +62,10 @@ public class Main {
                 System.out.print("Enter SalaryEmployee lastname: ");
                 String lastname = SCANNER_STR.nextLine();
                 System.out.print("Enter SalaryEmployee dayOfBirth dd/MM/yyyy: ");
-                String dayOfBirth = SCANNER_STR.nextLine();
+                Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
                 System.out.print("Enter SalaryEmployee hiringDate dd/MM/yyyy: ");
-                String hiringDate = SCANNER_STR.nextLine();
-                EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname,dayOfBirth,hiringDate));
+                Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
+                EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname, dayOfBirth, hiringDate));
                 break;
                 }
             case MANAGER -> {
@@ -75,9 +74,9 @@ public class Main {
                 System.out.print("Enter Manager lastname: ");
                 String lastname = SCANNER_STR.nextLine();
                 System.out.print("Enter Manager dayOfBirth dd/MM/yyyy: ");
-                String dayOfBirth = SCANNER_STR.nextLine();
+                Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
                 System.out.print("Enter Manager hiringDate dd/MM/yyyy: ");
-                String hiringDate = SCANNER_STR.nextLine();
+                Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(),SCANNER_INT.nextInt());
                 EMPLOYEE_LIST.add(new Manager(name, lastname,dayOfBirth,hiringDate));
                 break;
                 }

@@ -28,5 +28,7 @@ public class Main {
         System.out.println(date4);
         System.out.println("--------------------------");
         System.out.println(now);
+        System.out.println(DateCalc.calcLeapDaysSum(Date.today));
+        System.out.println(DateCalc.calcDaysBetweenTwoDate(date1,Date.today));
     }
 }
