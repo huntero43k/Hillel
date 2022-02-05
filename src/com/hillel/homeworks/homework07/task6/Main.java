@@ -15,10 +15,8 @@ public class Main {
         e = scanner.nextInt();
         f = scanner.nextInt();
 
-        int det = a * d - b * c;
-
-        x = (e * d - b * f) / det;
-        y = (a * f - e * c) / det;
+        x = (e * d - b * f) / (a * d - b * c);
+        y = (a * f - e * c) / (a * d - b * c);
 
         System.out.println(x + " " + y);
 
