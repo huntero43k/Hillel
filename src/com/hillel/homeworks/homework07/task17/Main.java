@@ -13,29 +13,11 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             array[i] = scanner.nextInt();
         }
-        System.out.println(countDistinct(array));
 
-//        Set<Integer> set = new HashSet<>();
-//        for (int x : array) {
-//            set.add(x);
-//        }
-//        System.out.println(set.size());
-    }
-
-    static int countDistinct(int[] array) {
-        int result = 1;
-
-        for (int i = 1; i < array.length; i++) {
-            int j = 0;
-            for (j = 0; j < i; j++) {
-                if (array[i] == array[j]) {
-                    break;
-                }
-            }
-            if (i == j) {
-                result++;
-            }
+        Set<Integer> set = new HashSet<>();
+        for (int x : array) {
+            set.add(x);
         }
-        return result;
+        System.out.println(set.size());
     }
 }
