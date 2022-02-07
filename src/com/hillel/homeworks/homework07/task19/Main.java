@@ -7,12 +7,10 @@ import java.util.Scanner;
 public class Main {
 
     static Map<String, String> dictionary = new HashMap<>();
-    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-
         String[] words = new String[n*2];
 
         for (int i = 0; i < words.length; i++) {
@@ -27,14 +25,14 @@ public class Main {
 
         String word = scanner.nextLine();
         getSynonym(word);
-
     }
 
     public static void getSynonym(String word) {
         for (var entry : dictionary.entrySet()) {
             if (entry.getKey().equals(word)) {
                 System.out.println(entry.getValue());
-            } else if (entry.getValue().equals(word)) {
+            }
+            else if (entry.getValue().equals(word)) {
                 System.out.println(entry.getKey());
             }
         }

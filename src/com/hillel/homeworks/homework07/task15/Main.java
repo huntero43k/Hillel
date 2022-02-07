@@ -17,18 +17,16 @@ public class Main {
     }
 
     public static boolean isPointInCircle(double x, double y) {
-    final double xc = -1;
-    final double yc = 1;
-    final double r = 2;
-
+        final double xc = -1;
+        final double yc = 1;
+        final double r = 2;
         return (x - xc) * (x - xc) + (y - yc) * (y - yc) <= r * r;
     }
 
     public static boolean isPointInsideCircle(double x, double y) {
-    final double xc = -1;
-    final double yc = 1;
-    final double r = 2;
-
+        final double xc = -1;
+        final double yc = 1;
+        final double r = 2;
         return (x - xc) * (x - xc) + (y - yc) * (y - yc) < r * r;
     }
 
@@ -37,10 +35,9 @@ public class Main {
         boolean rightLineLeft = (2 * x - y + 2 <= 0);
         boolean leftLineLeft = (x + y <= 0);
         boolean rightLineRight = (2 * x - y + 2 >= 0);
-
         boolean inCircleArea = isPointInCircle(x, y) && leftLineRight && rightLineLeft;
         boolean inBottom = !isPointInsideCircle(x, y) && leftLineLeft && rightLineRight;
-
         return inCircleArea || inBottom;
     }
+
 }

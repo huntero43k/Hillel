@@ -9,7 +9,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         int[] array = new int[n];
-
         for (int i = 0; i < array.length; i++) {
             array[i] = scanner.nextInt();
         }
@@ -20,8 +19,9 @@ public class Main {
             set.add(v);
             if (set.size() > temp) {
                 System.out.println("NO");
-            } else
-            System.out.println("YES");
+            } else {
+                System.out.println("YES");
+            }
         }
     }
 }

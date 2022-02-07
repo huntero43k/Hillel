@@ -20,4 +20,5 @@ public class Main {
     public static int min4(int a, int b, int c, int d) {
         return min(min(a, b), min(c, d));
     }
+
 }
