@@ -46,4 +46,11 @@ public class DateCalc {
             return x2 - x1;
         }
     }
+
+    // custom method NOT RECOMMENDED FOR USE (better use LocalDate Class)
+    // accuracy about 2000 years
+    public static int calcMonthsBetweenTwoDate(Date date) {
+        return (int)Math.floor(calcDaysBetweenTwoDate(date, Date.today) / 30.437);
+    }
+
 }

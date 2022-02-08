@@ -50,6 +50,9 @@ public class Date {
             return true;
         } else if (date.d <= daysInMonth[date.m - 1]) {
             return true;
+        } else if (date.d > today.d && date.m >= today.m && date.y >= today.y) {
+            System.out.println("WARNING! You input date in the future period, "
+                            + "inaccuracies in the calculations are possible!");
         }
         return false;
     }

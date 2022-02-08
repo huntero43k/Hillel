@@ -86,14 +86,14 @@ public class Main {
 
     // display employees
     public static void displayEmployee() {
-        System.out.println("----------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------");
         Iterator<Employee> i = EMPLOYEE_LIST.iterator();
         while (i.hasNext()) {
             Employee employee = i.next();{
                 System.out.println(employee);
             }
         }
-        System.out.println("----------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------");
     }
 
     // search employees
@@ -126,9 +126,9 @@ public class Main {
         }
 
         public static EmployeeType of(int value) {
-            for (EmployeeType option : values()) {
-                if (option.value == value) {
-                    return option;
+            for (EmployeeType type : values()) {
+                if (type.value == value) {
+                    return type;
                 }
             }
             throw new IllegalArgumentException("Option with selected value=" + value + " not found");
