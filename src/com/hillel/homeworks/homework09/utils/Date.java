@@ -41,7 +41,7 @@ public class Date {
     }
 
     // check if date is exists
-    static boolean isValidDate (Date date) {
+    public static boolean isValidDate (Date date) {
         if (date.d < 1 || date.m < 1 || date.y < 1 || date.m > 12) {    // date range input test
             return false;
         } else if (date.m == 2 && !isLeapYear(date) && date.d <= 28) {  // if not leap year February have 28 days
@@ -50,9 +50,6 @@ public class Date {
             return true;
         } else if (date.d <= daysInMonth[date.m - 1]) {
             return true;
-        } else if (date.d > today.d && date.m >= today.m && date.y >= today.y) {
-            System.out.println("WARNING! You input date in the future period, "
-                            + "inaccuracies in the calculations are possible!");
         }
         return false;
     }

@@ -25,17 +25,49 @@ abstract public class Employee {
         this.holidaysLeft = setUpHolidaysLeft();
     }
 
-    public int getAge() {
-        return (int)((DateCalc.calcDaysBetweenTwoDate(this.dayOfBirth, Date.today)) / 365.25);
-    }
     private int setUpHolidaysCount() {
         return (int)(DateCalc.calcMonthsBetweenTwoDate(this.hiringDate) * 2.5 + addVacationBenefits());
     }
+
     private int setUpHolidaysAlreadyTaken() {
         return 0;
     }
+
     private int setUpHolidaysLeft() {
         return this.holidaysLeft = this.holidaysSum - this.holidaysAlreadyTaken;
+    }
+
+    public int getAge() {
+        return (int)((DateCalc.calcDaysBetweenTwoDate(this.dayOfBirth, Date.today)) / 365.25);
+    }
+
+
+    // take vacation (
+    public void takeVacation(int newVacation) {
+        if (newVacation < this.holidaysLeft) {
+            this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
+            setUpHolidaysLeft();
+            System.out.println("Vacation allowed! " + "Days left: " + this.holidaysLeft);
+        }
+        else if (newVacation > this.holidaysLeft){
+            System.out.println("Not enough vacation days! " + "Days left: " + this.holidaysLeft);
+        }
+    }
+
+    // add additional vacation days if employee age > 50
+    private int addVacationBenefits() {
+        int additionalDays = 0;
+        if (getAge() >= 50) {
+            int yearBenefitsPlusBegin = this.dayOfBirth.y + 50;
+            Date ageVacationBenefits = new Date(01,01,yearBenefitsPlusBegin);
+            int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(ageVacationBenefits);
+            for (int i = 1; i < monthsWorkedAfter; i++) {
+                if (i == 1 || i % 13 == 0) {
+                    additionalDays += 2;
+                }
+            }
+        }
+        return additionalDays;
     }
 
     // setters & getters
@@ -66,6 +98,9 @@ abstract public class Employee {
     public int getHolidaysAlreadyTaken() {
         return holidaysAlreadyTaken;
     }
+    public void setHolidaysAlreadyTaken(int holidaysAlreadyTaken) {
+        this.holidaysAlreadyTaken = holidaysAlreadyTaken;
+    }
     public int getHolidaysSum() {
         return holidaysSum;
     }
@@ -73,39 +108,11 @@ abstract public class Employee {
         return holidaysLeft;
     }
 
-    // take vacation
-    public void takeVacation(int newVacation) {
-        if (newVacation < this.holidaysLeft) {
-            this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
-            setUpHolidaysLeft();
-            System.out.println("Vacation allowed! " + "Days left: " + this.holidaysLeft);
-        }
-        else if (newVacation > this.holidaysLeft){
-            System.out.println("Not enough vacation days! " + "Days left: " + this.holidaysLeft);
-        }
-    }
-
-    // calc additional vacation days if it exists
-    private int addVacationBenefits() {
-        int additionalDays = 0;
-        if (getAge() >= 50) {
-            int yearBenefitsPlusBegin = this.dayOfBirth.y + 50;
-            Date ageVacationBenefits = new Date(01,01,yearBenefitsPlusBegin);
-            int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(ageVacationBenefits);
-            for (int i = 1; i < monthsWorkedAfter; i++) {
-                if (i == 1 || i % 13 == 0) {
-                    additionalDays += 2;
-                }
-            }
-        }
-        return additionalDays;
-    }
-
     // display all necessary information about an employee
     public String toString() {
-        return "| full name: " + name.toUpperCase() + " " + lastname.toUpperCase() + " |"
-                + "\t" + " age: " + age + " |"
-                + "\t" + "vacation left: " + holidaysLeft + " |";
+        return "| full name: " + getName() + " " + getLastname() + " |"
+                + "\t" + " age: " + getAge() + " |"
+                + "\t" + "vacation left: " + getHolidaysLeft() + " |";
     }
 
 }
