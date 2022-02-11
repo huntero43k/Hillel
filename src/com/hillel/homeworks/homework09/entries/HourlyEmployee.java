@@ -4,6 +4,8 @@ import com.hillel.homeworks.homework09.utils.Date;
 
 public class HourlyEmployee extends Employee{
     String employeeType;
+    double HourlyWage;
+    double HoursWorked;
 
     public HourlyEmployee(String name, String lastname, Date dayOfBirth, Date hiringDate, int holidaysAlreadyTaken) {
         super(name, lastname, dayOfBirth, hiringDate);

@@ -9,7 +9,7 @@ import com.hillel.homeworks.homework09.utils.Date;
 import java.util.*;
 
 public class Main {
-    public static List<Employee> EMPLOYEE_LIST = new ArrayList<>();
+    public static List<Employee> EMPLOYEE_LIST = new ArrayList<>(500);
     public static Scanner SCANNER_STR = new Scanner(System.in);
     public static Scanner SCANNER_INT = new Scanner(System.in);
 
@@ -19,7 +19,7 @@ public class Main {
             System.out.println("1. CREATE");
             System.out.println("2. DISPLAY");
             System.out.println("3. SEARCH");
-            System.out.println("4. UPDATE");
+            System.out.println("4. VACATION");
             System.out.println("5. DELETE");
             System.out.println("6. EXIT");
             System.out.print("Enter Your Choice: ");
@@ -28,7 +28,7 @@ public class Main {
                 case CREATE -> createEmployee();
                 case DISPLAY -> displayEmployee();
                 case SEARCH -> searchEmployee();
-                case EDIT -> updateEmployee();
+                case VACATION -> takeVacation();
                 case DELETE -> deleteEmployee();
                 case EXIT -> exit = true;
             }
@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-    // create new HourlyEmployee class object
+    // create new HourlyEmployee
     public static void createHourlyEmployee() {
         System.out.print("Enter HourlyEmployee name: ");
         String name = SCANNER_STR.nextLine();
@@ -59,7 +59,6 @@ public class Main {
         String lastname = SCANNER_STR.nextLine();
         System.out.print("Enter hourlyEmployee dayOfBirth dd MM yyyy: ");
         Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-        //Date dayOfBirth1 = new Date(SCANNER_INT.nextLine().trim().replace("\n", "."));
         System.out.print("Enter HourlyEmployee hiringDate dd MM yyyy: ");
         Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
@@ -68,7 +67,7 @@ public class Main {
         System.out.println("\n" + "*** Employee was created successfully!***" + "\n");
     }
 
-    // create new SalaryEmployee class object
+    // create new SalaryEmployee
     public static void createSalaryEmployee() {
         System.out.print("Enter SalaryEmployee name: ");
         String name = SCANNER_STR.nextLine();
@@ -84,7 +83,7 @@ public class Main {
         System.out.println("\n" + "*** Employee was created successfully!***" + "\n");
     }
 
-    // create new Manager class object
+    // create new Manager
     public static void createManager() {
         System.out.print("Enter Manager name: ");
         String name = SCANNER_STR.nextLine();
@@ -100,7 +99,6 @@ public class Main {
         System.out.println("\n" + "*** Employee was created successfully!***" + "\n");
     }
 
-
     // display all employees
     public static void displayEmployee() {
         System.out.println("--------------------------------------------------------------------------------");
@@ -114,10 +112,10 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------");
     }
 
-    // search employees
+    // search employee
     public static void searchEmployee() {
         boolean found = false;
-        System.out.print("Enter lastname for SEARCH: ");
+        System.out.print("Enter employee lastname for SEARCH: ");
         String searchQuery = SCANNER_STR.nextLine();
         System.out.println("--------------------------------------------------------------------------------");
         for (Employee e : EMPLOYEE_LIST) {
@@ -133,26 +131,10 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------");
     }
 
-    // update menu
-    public static void updateEmployee() {
-        System.out.println("\t" + "1. TAKE VACATION");
-        System.out.println("\t" + "2. EDIT EMPLOYEE");
-        System.out.print("Enter Your Choice: ");
-        int option = SCANNER_INT.nextInt();
-        switch (option) {
-            case 1:
-                takeVacation();
-                break;
-            case 2:
-                editEmployee();
-                break;
-            default: System.out.println("Sorry, option not found!");
-        }
-    }
-
+    // take vacation
     public static void takeVacation() {
         boolean found = false;
-        System.out.print("Enter lastname of employee to add new vacation: ");
+        System.out.print("Enter employee lastname to add new vacation: ");
         String searchQuery = SCANNER_STR.nextLine();
         System.out.println("--------------------------------------------------------------------------------");
         ListIterator<Employee> li = EMPLOYEE_LIST.listIterator();
@@ -170,48 +152,8 @@ public class Main {
         }
         if (!found) {
             System.out.println("Record Not Found :(");
-        } else {
-            System.out.println("\n" + "*** Vacation entry has been successfully entered!***" + "\n");
+            System.out.println("--------------------------------------------------------------------------------");
         }
-        System.out.println("--------------------------------------------------------------------------------");
-    }
-
-    public static void editEmployee() {
-        boolean found = false;
-        System.out.print("Enter lastname of employee to EDIT: ");
-        String searchQuery = SCANNER_STR.nextLine();
-        System.out.println("--------------------------------------------------------------------------------");
-        ListIterator<Employee> li = EMPLOYEE_LIST.listIterator();
-        while (li.hasNext()) {
-            Employee e = li.next();
-            if (e.getLastname().equalsIgnoreCase(searchQuery) ||
-                    e.getName().equalsIgnoreCase(searchQuery)) {
-                System.out.println(e);
-                System.out.println("------------------------------");
-                System.out.print("Enter NEW name: ");
-                String name = SCANNER_STR.nextLine();
-                e.setName(name);
-                System.out.print("Enter NEW lastname: ");
-                String lastname = SCANNER_STR.nextLine();
-                e.setLastname(lastname);
-                System.out.print("Enter NEW dayOfBirth dd MM yyyy: ");
-                Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-                e.setDayOfBirth(dayOfBirth);
-                System.out.print("Enter NEW hiringDate dd MM yyyy: ");
-                Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-                e.setHiringDate(hiringDate);
-                System.out.print("Enter NEW sum of all taken holidays by " + name + " " + lastname + " : ");
-                int holidaysAlreadyTaken = SCANNER_INT.nextInt();
-                e.setHolidaysAlreadyTaken(holidaysAlreadyTaken);
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("Record Not Found :(");
-        } else {
-            System.out.println("\n" + "*** Employee was EDITED successfully!***" + "\n");
-        }
-        System.out.println("--------------------------------------------------------------------------------");
     }
 
     // delete employee
@@ -237,12 +179,12 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------");
     }
 
-    // create menu list with value id
+    // menu list with value id
     enum Option {
         CREATE(1),
         DISPLAY(2),
         SEARCH(3),
-        EDIT(4),
+        VACATION(4),
         DELETE(5),
         EXIT(6),
         ;
@@ -262,7 +204,7 @@ public class Main {
         }
     }
 
-    // create employee types
+    // employee type menu
     enum EmployeeType {
         HOURLY_EMPLOYEE(1),
         SALARY_EMPLOYEE(2),

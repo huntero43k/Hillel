@@ -24,25 +24,24 @@ abstract public class Employee {
         this.holidaysAlreadyTaken = setUpHolidaysAlreadyTaken();
         this.holidaysLeft = setUpHolidaysLeft();
     }
-
+    // variable setUpHolidaysCount initialise
     private int setUpHolidaysCount() {
         return (int)(DateCalc.calcMonthsBetweenTwoDate(this.hiringDate) * 2.5 + addVacationBenefits());
     }
-
+    // variable setUpHolidaysAlreadyTaken initialise
     private int setUpHolidaysAlreadyTaken() {
         return 0;
     }
-
+    // count holidays
     private int setUpHolidaysLeft() {
         return this.holidaysLeft = this.holidaysSum - this.holidaysAlreadyTaken;
     }
-
+    // get Age
     public int getAge() {
         return (int)((DateCalc.calcDaysBetweenTwoDate(this.dayOfBirth, Date.today)) / 365.25);
     }
 
-
-    // take vacation (
+    // take vacation (holiday)
     public void takeVacation(int newVacation) {
         if (newVacation < this.holidaysLeft) {
             this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
