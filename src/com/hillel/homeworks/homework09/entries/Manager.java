@@ -12,6 +12,8 @@ public class Manager extends Employee{
         this.employeeType = "Manager";
     }
 
+
+
     @Override
     public String toString() {
         return super.toString() + "\t" + "Type: "+ employeeType + " |";

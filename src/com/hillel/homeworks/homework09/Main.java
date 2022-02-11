@@ -5,6 +5,7 @@ import com.hillel.homeworks.homework09.entries.HourlyEmployee;
 import com.hillel.homeworks.homework09.entries.Manager;
 import com.hillel.homeworks.homework09.entries.SalaryEmployee;
 import com.hillel.homeworks.homework09.utils.Date;
+import com.hillel.homeworks.homework09.utils.DateCalc;
 
 import java.util.*;
 
@@ -61,6 +62,7 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
         System.out.print("Enter HourlyEmployee hiringDate dd MM yyyy: ");
         Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new HourlyEmployee(name,lastname,dayOfBirth,hiringDate,holidaysAlreadyTaken));
@@ -77,6 +79,7 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
         System.out.print("Enter SalaryEmployee hiringDate dd MM yyyy: ");
         Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname, dayOfBirth, hiringDate,holidaysAlreadyTaken));
@@ -93,10 +96,17 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
         System.out.print("Enter Manager hiringDate dd MM yyyy: ");
         Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
-        EMPLOYEE_LIST.add(new Manager(name, lastname, dayOfBirth, hiringDate,holidaysAlreadyTaken));
+        EMPLOYEE_LIST.add(new Manager(name, lastname, dayOfBirth, hiringDate, holidaysAlreadyTaken));
         System.out.println("\n" + "*** Employee was created successfully!***" + "\n");
+    }
+
+    // ATTENTION! This is not an exact value, it is used only for convenience in user interface menu
+    // display approximate number of available vacation days
+    public static int holidaysPreview(Date hiringDate) {
+        return (int) (DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5);
     }
 
     // display all employees
@@ -104,10 +114,13 @@ public class Main {
         System.out.println("--------------------------------------------------------------------------------");
         Iterator<Employee> i = EMPLOYEE_LIST.iterator();
         while (i.hasNext()) {
-            Employee employee = i.next();
-            {
-                System.out.println(employee);
+                Employee employee = i.next();
+                {
+                    System.out.println(employee);
+                }
             }
+        if (EMPLOYEE_LIST.size() == 0) {
+            System.out.println("NO RECORDS IN DATABASE");
         }
         System.out.println("--------------------------------------------------------------------------------");
     }
@@ -134,15 +147,15 @@ public class Main {
     // take vacation
     public static void takeVacation() {
         boolean found = false;
+        System.out.println("\t" + "***  TAKE VACATION MENU  ***");
         System.out.print("Enter employee lastname to add new vacation: ");
         String searchQuery = SCANNER_STR.nextLine();
         System.out.println("--------------------------------------------------------------------------------");
-        ListIterator<Employee> li = EMPLOYEE_LIST.listIterator();
-        while (li.hasNext()) {
-            Employee e = li.next();
+        for (Employee e : EMPLOYEE_LIST) {
             if (e.getLastname().equalsIgnoreCase(searchQuery) ||
                     e.getName().equalsIgnoreCase(searchQuery)) {
-                System.out.println(e);
+                System.out.println("\t" + "* "+ e.getName() + " " + e.getLastname()
+                        + " -> " + e.getHolidaysLeft() + " days left");
                 System.out.println("------------------------------");
                 System.out.print("Enter days number of NEW vacation: ");
                 int newVacation = SCANNER_INT.nextInt();
@@ -152,8 +165,8 @@ public class Main {
         }
         if (!found) {
             System.out.println("Record Not Found :(");
-            System.out.println("--------------------------------------------------------------------------------");
         }
+        System.out.println("--------------------------------------------------------------------------------");
     }
 
     // delete employee

@@ -58,14 +58,17 @@ abstract public class Employee {
         int additionalDays = 0;
         if (getAge() >= 50) {
             int yearBenefitsPlusBegin = this.dayOfBirth.y + 50;
-            Date ageVacationBenefits = new Date(01,01,yearBenefitsPlusBegin);
-            int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(ageVacationBenefits);
-            for (int i = 1; i < monthsWorkedAfter; i++) {
-                if (i == 1 || i % 13 == 0) {
-                    additionalDays += 2;
+            if (yearBenefitsPlusBegin < getHiringDate().y) {
+                yearBenefitsPlusBegin = getHiringDate().y;
+            }
+            Date ageVacationBenefits = new Date(1,1,yearBenefitsPlusBegin);
+                int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(ageVacationBenefits);
+                for (int i = 1; i < monthsWorkedAfter; i++) {
+                    if (i == 1 || i % 13 == 0) {
+                        additionalDays += 2;
+                    }
                 }
             }
-        }
         return additionalDays;
     }
 
