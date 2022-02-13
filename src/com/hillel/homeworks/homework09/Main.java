@@ -22,16 +22,27 @@ public class Main {
             System.out.println("3. SEARCH");
             System.out.println("4. VACATION");
             System.out.println("5. DELETE");
-            System.out.println("6. EXIT");
+            System.out.println("0. EXIT");
             System.out.print("Enter Your Choice: ");
             int option = SCANNER_INT.nextInt();
-            switch (Option.of(option)) {
-                case CREATE -> createEmployee();
-                case DISPLAY -> displayEmployee();
-                case SEARCH -> searchEmployee();
-                case VACATION -> takeVacation();
-                case DELETE -> deleteEmployee();
-                case EXIT -> exit = true;
+            try {
+                switch (Option.of(option)) {
+                    case CREATE -> createEmployee();
+                    case DISPLAY -> displayEmployee();
+                    case SEARCH -> searchEmployee();
+                    case VACATION -> takeVacation();
+                    case DELETE -> deleteEmployee();
+                    case EXIT -> exit = true;
+                }
+            // catch exception if input value different from menu values
+            } catch (IllegalArgumentException exception) {
+                print(" INPUT ERROR! Out of range encountered.");
+                System.out.print("Want to continue? Y/N: ");
+                String temp = SCANNER_STR.nextLine();
+                if (temp.equalsIgnoreCase("y")) {
+                    printLine();
+                }
+                else System.exit(0);
             }
         }
     }
@@ -45,11 +56,23 @@ public class Main {
             }
             System.out.print("Select Employee Type: ");
             int option = SCANNER_INT.nextInt();
-            switch (EmployeeType.of(option)) {
-                case HOURLY_EMPLOYEE -> createHourlyEmployee();
-                case SALARY_EMPLOYEE -> createSalaryEmployee();
-                case MANAGER -> createManager();
-                default -> System.out.println("Sorry, option not found!");
+            try {
+                switch (EmployeeType.of(option)) {
+                    case HOURLY_EMPLOYEE -> createHourlyEmployee();
+                    case SALARY_EMPLOYEE -> createSalaryEmployee();
+                    case MANAGER -> createManager();
+                }
+            }
+            // catch exception if input value different from menu values
+            catch (IllegalArgumentException exception) {
+                print(" INPUT ERROR! Out of range encountered.");
+                System.out.print("Want to continue? Y/N: ");
+                String temp = SCANNER_STR.nextLine();
+                if (temp.equalsIgnoreCase("y")) {
+                    printLine();
+                    createEmployee();
+                }
+                else System.exit(0);
             }
         }
         else {
@@ -112,7 +135,7 @@ public class Main {
     }
 
     // ATTENTION! This is not an exact value, it is used only for convenience in user interface menu
-    // display approximate number of available vacation days
+    // display approximate number of available vacation days (without benefits of 50+)
     public static int holidaysPreview(Date hiringDate) {
         return (int) (DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5);
     }
@@ -138,7 +161,7 @@ public class Main {
         if (EMPLOYEE_LIST.size() > 0) {
             boolean found = false;
             System.out.println("\t" + " * SEARCH EMPLOYEE MENU ->");
-            System.out.print("Enter employee name/lastname for SEARCH: ");
+            System.out.print("Enter employee name or lastname for SEARCH: ");
             String searchQuery = SCANNER_STR.nextLine();
             printLine();
             for (Employee e : EMPLOYEE_LIST) {
@@ -191,7 +214,6 @@ public class Main {
 
     // delete employee
     public static void deleteEmployee() {
-        // check that the database is not empty
         if (EMPLOYEE_LIST.size() > 0) {
             System.out.println("\t" + "* DELETE EMPLOYEE MENU ->");
             boolean found = false;
@@ -208,14 +230,15 @@ public class Main {
                     System.out.print("Are you sure want to delete "
                             + e.getName() + " " + e.getLastname() + " from list? Y/N : ");
                     String confirm = SCANNER_STR.nextLine();
+                    // delete confirm
                     if (confirm.equalsIgnoreCase("y")) {
-                        // delete confirm
                         i.remove();
                         printLine();
                         System.out.println("Record: " + e.getName() + " " + e.getLastname() + " DELETED successfully!");
                         found = true;
-                    } else if (confirm.equalsIgnoreCase("n")){
-                        // delete cancel
+                    }
+                    // delete cancel
+                    else if (confirm.equalsIgnoreCase("n")){
                         found = true;
                         break;
                     } else {
@@ -256,7 +279,7 @@ public class Main {
         SEARCH(3),
         VACATION(4),
         DELETE(5),
-        EXIT(6),
+        EXIT(0),
         ;
         private final int value;
 
@@ -270,7 +293,7 @@ public class Main {
                     return option;
                 }
             }
-            throw new IllegalArgumentException("Option with selected value=" + value + " not found");
+                throw new IllegalArgumentException("Option with selected value= " + value + " not found");
         }
     }
 
@@ -292,7 +315,7 @@ public class Main {
                     return option;
                 }
             }
-            throw new InputMismatchException("Option with selected value = " + value + " not found");
+            throw new IllegalArgumentException("Option with selected value= " + value + " not found");
         }
     }
 
