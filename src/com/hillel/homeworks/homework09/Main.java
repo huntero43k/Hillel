@@ -38,7 +38,7 @@ public class Main {
 
     // create employee menu
     public static void createEmployee() {
-        if (EMPLOYEE_LIST.size() < 2) {
+        if (EMPLOYEE_LIST.size() < 500) {
             int menuTempOption = 1;
             for (EmployeeType type : EmployeeType.values()) {
                 System.out.println("\t" + menuTempOption++ + ". " + type.name());
