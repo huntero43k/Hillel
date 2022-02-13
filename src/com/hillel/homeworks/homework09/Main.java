@@ -143,13 +143,9 @@ public class Main {
     // display all employees
     public static void displayEmployee() {
         printLine();
-        Iterator<Employee> i = EMPLOYEE_LIST.iterator();
-        while (i.hasNext()) {
-                Employee employee = i.next();
-                {
-                    System.out.println(employee);
-                }
-            }
+        for (Employee employee : EMPLOYEE_LIST) {
+                System.out.println(employee);
+        }
         if (EMPLOYEE_LIST.size() == 0) {
             System.out.println("DATABASE IS EMPTY!");
         }
