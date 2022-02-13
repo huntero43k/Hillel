@@ -43,12 +43,12 @@ abstract public class Employee {
 
     // take vacation (holiday)
     public void takeVacation(int newVacation) {
-        if (newVacation < this.holidaysLeft) {
+        if (newVacation <= this.holidaysLeft) {
             this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
             setUpHolidaysLeft();
             System.out.println("Vacation allowed! " + "Days left: " + this.holidaysLeft);
         }
-        else if (newVacation > this.holidaysLeft){
+        else {
             System.out.println("Not enough vacation days! " + "Days left: " + this.holidaysLeft);
         }
     }
