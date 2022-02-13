@@ -16,6 +16,6 @@ public class Manager extends Employee{
 
     @Override
     public String toString() {
-        return super.toString() + "\t" + "Type: "+ employeeType + " |";
+        return super.toString() + "\t" + "TYPE: "+ employeeType + " |";
     }
 }

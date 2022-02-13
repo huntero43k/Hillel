@@ -12,7 +12,6 @@ abstract public class Employee {
     private int holidaysAlreadyTaken;
     final private int holidaysSum;
     private int holidaysLeft;
-    final private int age;
 
     public Employee(String name, String lastname, Date dayOfBirth, Date hiringDate) {
         this.name = name;
@@ -20,7 +19,7 @@ abstract public class Employee {
         this.dayOfBirth = dayOfBirth;
         this.hiringDate = hiringDate;
         this.holidaysSum = setUpHolidaysCount();
-        this.age = getAge();
+        int age = getAge();
         this.holidaysAlreadyTaken = setUpHolidaysAlreadyTaken();
         this.holidaysLeft = setUpHolidaysLeft();
     }
@@ -28,7 +27,7 @@ abstract public class Employee {
     private int setUpHolidaysCount() {
         return (int)(DateCalc.calcMonthsBetweenTwoDate(this.hiringDate) * 2.5 + addVacationBenefits());
     }
-    // variable setUpHolidaysAlreadyTaken initialise
+    // variable setUpHolidaysAlreadyTaken default initialise
     private int setUpHolidaysAlreadyTaken() {
         return 0;
     }
@@ -43,12 +42,14 @@ abstract public class Employee {
 
     // take vacation (holiday)
     public void takeVacation(int newVacation) {
-        if (newVacation <= this.holidaysLeft) {
+        if (newVacation <= this.holidaysLeft && newVacation >= 0) {
             this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
             setUpHolidaysLeft();
             System.out.println("Vacation allowed! " + "Days left: " + this.holidaysLeft);
         }
-        else {
+        else if (newVacation < 0) {
+            System.out.println("Vacation can't be negative number! " + "Days left: " + this.holidaysLeft);
+        } else {
             System.out.println("Not enough vacation days! " + "Days left: " + this.holidaysLeft);
         }
     }
@@ -112,9 +113,9 @@ abstract public class Employee {
 
     // display all necessary information about an employee
     public String toString() {
-        return "| full name: " + getName() + " " + getLastname() + " |"
-                + "\t" + " age: " + getAge() + " |"
-                + "\t" + "vacation left: " + getHolidaysLeft() + " |";
+        return "| FULL_NAME: " + getName() + " " + getLastname() + " |"
+                + "\t" + "AGE: " + getAge() + " |"
+                + "\t" + "VACATION_LEFT: " + getHolidaysLeft() + " |";
     }
 
 }

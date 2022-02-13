@@ -7,7 +7,7 @@ public class DateCalc {
         int leapDays = 0;
         int tempYear = date.y;
         if (date.m <= 2) {          // check if current input date not bigger for month 2 (leap day include chance)
-            tempYear--;             //
+            tempYear--;             // temp value for year calculating
         }
         //count all leap days
         for (int i = 1; i <= date.y ; i++) {

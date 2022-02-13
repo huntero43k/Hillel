@@ -53,7 +53,7 @@ public class Main {
             }
         }
         else {
-            print("You have reached the maximum value of employees!");
+            print(" You have reached the maximum value of employees!");
         }
     }
 
@@ -64,15 +64,15 @@ public class Main {
         String name = SCANNER_STR.nextLine();
         System.out.print("Enter lastname: ");
         String lastname = SCANNER_STR.nextLine();
-        System.out.print("Enter dayOfBirth dd MM yyyy: ");
-        Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-        System.out.print("Enter hiringDate dd MM yyyy: ");
-        Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.print("Enter dayOfBirth (dd.MM.yyyy): ");
+        Date dayOfBirth = new Date(SCANNER_STR.nextLine());
+        System.out.print("Enter hiringDate (dd.MM.yyyy): ");
+        Date hiringDate = new Date(SCANNER_STR.nextLine());
         System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new HourlyEmployee(name,lastname,dayOfBirth,hiringDate,holidaysAlreadyTaken));
-        System.out.println("\n" + "*** Employee was created successfully! ***" + "\n");
+        print(" *** Employee was created successfully! ***");
     }
 
     // create new SalaryEmployee
@@ -82,15 +82,15 @@ public class Main {
         String name = SCANNER_STR.nextLine();
         System.out.print("Enter lastname: ");
         String lastname = SCANNER_STR.nextLine();
-        System.out.print("Enter dayOfBirth (dd MM yyyy): ");
-        Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-        System.out.print("Enter hiringDate (dd MM yyyy): ");
-        Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.print("Enter dayOfBirth (dd.MM.yyyy): ");
+        Date dayOfBirth = new Date(SCANNER_STR.nextLine());
+        System.out.print("Enter hiringDate (dd.MM.yyyy): ");
+        Date hiringDate = new Date(SCANNER_STR.nextLine());
         System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname, dayOfBirth, hiringDate,holidaysAlreadyTaken));
-        System.out.println("\n" + "*** Employee was created successfully! ***" + "\n");
+        print(" *** Employee was created successfully! ***");
     }
 
     // create new Manager
@@ -100,15 +100,15 @@ public class Main {
         String name = SCANNER_STR.nextLine();
         System.out.print("Enter lastname: ");
         String lastname = SCANNER_STR.nextLine();
-        System.out.print("Enter dayOfBirth (dd MM yyyy): ");
-        Date dayOfBirth = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
-        System.out.print("Enter hiringDate (dd MM yyyy): ");
-        Date hiringDate = new Date(SCANNER_INT.nextInt(), SCANNER_INT.nextInt(), SCANNER_INT.nextInt());
+        System.out.print("Enter dayOfBirth (dd.MM.yyyy): ");
+        Date dayOfBirth = new Date(SCANNER_STR.nextLine());
+        System.out.print("Enter hiringDate (dd.MM.yyyy): ");
+        Date hiringDate = new Date(SCANNER_STR.nextLine());
         System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new Manager(name, lastname, dayOfBirth, hiringDate, holidaysAlreadyTaken));
-        System.out.println("\n" + "*** Employee was created successfully! ***" + "\n");
+        print(" *** Employee was created successfully! ***");
     }
 
     // ATTENTION! This is not an exact value, it is used only for convenience in user interface menu
@@ -119,7 +119,7 @@ public class Main {
 
     // display all employees
     public static void displayEmployee() {
-        System.out.println("--------------------------------------------------------------------------------");
+        printLine();
         Iterator<Employee> i = EMPLOYEE_LIST.iterator();
         while (i.hasNext()) {
                 Employee employee = i.next();
@@ -130,21 +130,17 @@ public class Main {
         if (EMPLOYEE_LIST.size() == 0) {
             System.out.println("DATABASE IS EMPTY!");
         }
-        System.out.println("--------------------------------------------------------------------------------");
+        printLine();
     }
 
     // search employee
     public static void searchEmployee() {
-        if (EMPLOYEE_LIST.size() == 0) {
-            System.out.println("--------------------------------------------------------------------------------");
-            System.out.println("DATABASE IS EMPTY!");
-        }
-        else {
+        if (EMPLOYEE_LIST.size() > 0) {
             boolean found = false;
             System.out.println("\t" + " * SEARCH EMPLOYEE MENU ->");
             System.out.print("Enter employee name/lastname for SEARCH: ");
             String searchQuery = SCANNER_STR.nextLine();
-            System.out.println("--------------------------------------------------------------------------------");
+            printLine();
             for (Employee e : EMPLOYEE_LIST) {
                 if (e.getLastname().equalsIgnoreCase(searchQuery) ||
                         e.getName().equalsIgnoreCase(searchQuery)) {
@@ -156,27 +152,27 @@ public class Main {
                 System.out.println("Record Not Found :(");
             }
         }
-        System.out.println("--------------------------------------------------------------------------------");
+        else {
+            printLine();
+            System.out.println("DATABASE IS EMPTY!");
+        }
+        printLine();
     }
 
     // take vacation
     public static void takeVacation() {
-        if (EMPLOYEE_LIST.size() == 0) {
-            System.out.println("--------------------------------------------------------------------------------");
-            System.out.println("DATABASE IS EMPTY!");
-        }
-        else {
+        if (EMPLOYEE_LIST.size() > 0) {
             boolean found = false;
             System.out.println("\t" + "* TAKE VACATION EMPLOYEE MENU ->");
             System.out.print("Enter employee lastname to add new vacation: ");
             String searchQuery = SCANNER_STR.nextLine();
-            System.out.println("--------------------------------------------------------------------------------");
+            printLine();
             for (Employee e : EMPLOYEE_LIST) {
                 if (e.getLastname().equalsIgnoreCase(searchQuery)) {
                     System.out.println("\t" + "* "+ e.getName() + " " + e.getLastname()
                             + " -> " + e.getHolidaysLeft() + " days left");
-                    System.out.println("------------------------------");
-                    System.out.print("Enter days number of NEW vacation: ");
+                    printLine();
+                    System.out.print("Enter the number of vacation days: ");
                     int newVacation = SCANNER_INT.nextInt();
                     e.takeVacation(newVacation);
                     found = true;
@@ -186,40 +182,45 @@ public class Main {
                 System.out.println("Record Not Found :(");
             }
         }
-        System.out.println("--------------------------------------------------------------------------------");
+        else {
+            printLine();
+            System.out.println("DATABASE IS EMPTY!");
+        }
+        printLine();
     }
 
     // delete employee
     public static void deleteEmployee() {
-        if (EMPLOYEE_LIST.size() == 0) {
-            System.out.println("--------------------------------------------------------------------------------");
-            System.out.println("DATABASE IS EMPTY!");
-        }
-        else {
+        // check that the database is not empty
+        if (EMPLOYEE_LIST.size() > 0) {
             System.out.println("\t" + "* DELETE EMPLOYEE MENU ->");
             boolean found = false;
             System.out.print("Enter employee lastname to DELETE: ");
             String searchQuery = SCANNER_STR.nextLine();
-            System.out.println("--------------------------------------------------------------------------------");
+            printLine();
             Iterator<Employee> i = EMPLOYEE_LIST.iterator();
             while (i.hasNext()) {
                 Employee e = i.next();
                 if (e.getLastname().equalsIgnoreCase(searchQuery)) {
                     System.out.println(e);
-                    System.out.println("---------------------------" +
-                            "-----------------------------------------------------");
+                    // delete confirmation
+                    printLine();
                     System.out.print("Are you sure want to delete "
-                            + e.getName() + " " + e.getLastname() + "from list? Y/N : ");
+                            + e.getName() + " " + e.getLastname() + " from list? Y/N : ");
                     String confirm = SCANNER_STR.nextLine();
                     if (confirm.equalsIgnoreCase("y")) {
+                        // delete confirm
                         i.remove();
-                        System.out.println("---------------------------" +
-                                "-----------------------------------------------------");
-                        System.out.println("Record DELETED successfully!");
+                        printLine();
+                        System.out.println("Record: " + e.getName() + " " + e.getLastname() + " DELETED successfully!");
                         found = true;
-                    } else {
+                    } else if (confirm.equalsIgnoreCase("n")){
+                        // delete cancel
                         found = true;
                         break;
+                    } else {
+                        // output exception if option not 'y' or 'n'
+                        throw new IllegalArgumentException("Option with selected value = " + confirm + " not found!");
                     }
                 }
             }
@@ -227,7 +228,12 @@ public class Main {
                 System.out.println("Record Not Found :(");
             }
         }
-        System.out.println("--------------------------------------------------------------------------------");
+        // if database is empty print result
+        else {
+            printLine();
+            System.out.println("DATABASE IS EMPTY!");
+        }
+        printLine();
     }
 
     // make beauty
@@ -239,6 +245,10 @@ public class Main {
         System.out.println(line1);
     }
 
+    // make beauty (just draw a line)
+    public static void printLine() {
+        System.out.println("-----------------------------------------------------------------------------------------");
+    }
     // menu list with value id
     enum Option {
         CREATE(1),
@@ -282,7 +292,7 @@ public class Main {
                     return option;
                 }
             }
-            throw new IllegalArgumentException("Option with selected value=" + value + " not found");
+            throw new InputMismatchException("Option with selected value = " + value + " not found");
         }
     }
 

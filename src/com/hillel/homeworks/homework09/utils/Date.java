@@ -24,7 +24,7 @@ public class Date {
 
     // String constructor
     public Date(String date){
-        String[] values = date.split("/");
+        String[] values = date.split("\\.");
         this.d = Integer.parseInt(values[0]);
         this.m = Integer.parseInt(values[1]);
         this.y = Integer.parseInt(values[2]);
@@ -32,7 +32,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return d + "/" + m + "/" + y;
+        return d + "." + m + "." + y;
     }
 
     // check if a year is a leap year
