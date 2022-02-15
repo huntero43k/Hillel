@@ -53,4 +53,9 @@ public class DateCalc {
         return (int)Math.floor(calcDaysBetweenTwoDate(date, Date.today) / 30.437);
     }
 
+    //calculate age from Date dayOfBirth
+    public static int calcAge(Date dayOfBirth) {
+        return (int)((DateCalc.calcDaysBetweenTwoDate(dayOfBirth, Date.today)) / 365.25);
+    }
+
 }

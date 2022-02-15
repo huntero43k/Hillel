@@ -189,9 +189,12 @@ public class Main {
                     System.out.println("\t" + "* "+ e.getName() + " " + e.getLastname()
                             + " -> " + e.getHolidaysLeft() + " days left");
                     printLine();
-                    System.out.print("Enter the number of vacation days: ");
-                    int newVacation = SCANNER_INT.nextInt();
-                    e.takeVacation(newVacation);
+                    System.out.println("\t" + "** Enter date range for vacation (from - to) in dd.MM.yyyy format-> ");
+                    System.out.print("date1 - FROM: ");
+                    Date date1 = new Date(SCANNER_STR.nextLine());
+                    System.out.print("date2 - TO: ");
+                    Date date2 = new Date(SCANNER_STR.nextLine());
+                    e.takeVacation(date1, date2);
                     found = true;
                 }
             }

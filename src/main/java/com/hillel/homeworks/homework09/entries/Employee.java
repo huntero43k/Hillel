@@ -5,97 +5,134 @@ package com.hillel.homeworks.homework09.entries;
  * The class contains:                                                                          *
  * ■ Private data fields: name, lastname, dayOfBirth, hiringDate, holidaysAlreadyTaken,         *
  *                        holidaysSum, holidaysLeft.                                            *
- * ■ A constructor with the arguments for name, lastname, dayOfBirth and hiringDate.            *                   *
- * ■ Six getter methods for a, b, c, d, e, and f.                                 *
- * ■ A method named isSolvable() that returns true if ad - bc is not 0.           *
- * ■ Methods getX() and getY() that return the solution for the equation.         *
- *                                                                                *
- * This program prompts the user to enter a, b, c, d, e, and f and displays the   *
- * result. If ad - bc is 0, report that “The equation has no solution.”           *
- *********************************************************************************/
+ * ■ A constructor with the arguments for name, lastname, dayOfBirth and hiringDate.            *
+ * ■ All getters are implemented through lombok.                                                *
+ * ■ All setters are custom methods that return the result of vacation counting using input data*
+ * ■ A method named takeVacation() method is used to grant vacation and count remaining days.   *
+ * ■ A method addVacationBenefits() calc additional vacation days if employee age is > 50 years.*
+ *                                                                                              *
+ * This program takes standard employee input and returns the result of a calculation that      *
+ * provides vacation count functionality.                                                       *
+ ***********************************************************************************************/
 
 import com.hillel.homeworks.homework09.utils.Date;
 import com.hillel.homeworks.homework09.utils.DateCalc;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 
+@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 abstract public class Employee {
 
-    final private String name;
-    final private String lastname;
-    final private Date dayOfBirth;
-    final private Date hiringDate;
-    private int holidaysAlreadyTaken;
-    final private int holidaysSum;
-    private int holidaysLeft;
-    final private int age;
+    final String name;
+    final String lastname;
+    final Date dayOfBirth;
+    final Date hiringDate;
+    int holidaysAlreadyTaken;
+    int holidaysSum;
+    int holidaysLeft;
+    int age;
 
+    /**
+     * This is a constructor to initialize employee's objects.
+     * @param name an initial employee name
+     * @param lastname an initial employee lastname
+     * @param dayOfBirth this is the employee's date of birth
+     * @param hiringDate this is the date of hire
+     */
     public Employee(String name, String lastname, Date dayOfBirth, Date hiringDate) {
         this.name = name;
         this.lastname = lastname;
         this.dayOfBirth = dayOfBirth;
         this.hiringDate = hiringDate;
-        this.holidaysSum = setUpHolidaysCount();
-        this.age = setUpAge();
-        this.holidaysAlreadyTaken = setUpHolidaysAlreadyTaken();
-        this.holidaysLeft = setUpHolidaysLeft();
+        setAge(dayOfBirth);
+        setHolidaysSum(hiringDate);
+        setHolidaysAlreadyTaken();
+        setHolidaysLeft();
     }
-    // counts the number of all vacation days (handles only once when initializing a new object)
-    private int setUpHolidaysCount() {
-        return (int)(DateCalc.calcMonthsBetweenTwoDate(this.hiringDate) * 2.5 + addVacationBenefits());
-    }
-    // variable setUpHolidaysAlreadyTaken default initialise by zero
-    private int setUpHolidaysAlreadyTaken() {
-        return 0;
-    }
-    // calculate holidays
-    private int setUpHolidaysLeft() {
-        return this.holidaysLeft = this.holidaysSum - this.holidaysAlreadyTaken;
-    }
-    // calculate age
-    private int setUpAge() {
-        return (int)((DateCalc.calcDaysBetweenTwoDate(this.dayOfBirth, Date.today)) / 365.25);
-    }
-
-
 
     // setters & getters
-    public String getName() {
-        return name;
-    }
-    public String getLastname() {
-        return lastname;
-    }
-    public Date getDayOfBirth() {
-        return dayOfBirth;
-    }
-    public int getAge() {
-        return age;
-    }
-    public Date getHiringDate() {
-        return hiringDate;
-    }
-    public int getHolidaysLeft() {
-        return holidaysLeft;
+    /**
+     * Calculates the total amount of employee's vacation days
+     * @param hiringDate accepted as input
+     *
+     * This method calculates the total vacation days of Employee.
+     * The logic of the method includes 3 main points:
+     * 1) The method calculates the total number of months worked by an employee, starting from
+     *                   the hiring date (the utils Class DateCalc is used for calculating);
+     * 2) Then it adds 2.5 vacation days every month (assuming 30 days per year);
+     * 3) Also adds "benefits" days, if they exist, to the total number of days,
+     *                   helper method addVacationBenefits() is used (method description below);
+     */
+    private void setHolidaysSum(Date hiringDate) {
+        this.holidaysSum = (int)(DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5 + addVacationBenefits());
     }
 
-    // take vacation (holiday)
-    public void takeVacation(int newVacation) {
-        if (newVacation <= this.holidaysLeft && newVacation >= 0) {
-            this.holidaysAlreadyTaken = this.holidaysAlreadyTaken + newVacation;
-            setUpHolidaysLeft();
-            System.out.println("Vacation allowed! " + "Days left: " + this.holidaysLeft);
+    /**
+     * Sets the age of the employee
+     * @param dayOfBirth accepted as input
+     * helper method DateCalc.calcAge() is used
+     */
+    private void setAge(Date dayOfBirth) {
+        this.age = DateCalc.calcAge(dayOfBirth);
+    }
+
+    /**
+     * Sets the initial value to initialize the variable
+     */
+    private void setHolidaysAlreadyTaken() {
+        this.holidaysAlreadyTaken = 0;
+    }
+
+    /**
+     * The method calculates the number of vacation days left using known variables such as:
+     * holidaysAlreadyTaken, holidaysAlreadyTaken
+     */
+    private void setHolidaysLeft() {
+        this.holidaysLeft = this.holidaysSum - this.holidaysAlreadyTaken;
+    }
+
+    /**
+     *
+     * @param date1
+     * @param date2
+     */
+    // take vacation (Date range FROM dd.MM.yyyy - TO dd.MM.yyyy)
+    public void takeVacation(Date date1, Date date2) {
+        int newHoliday = DateCalc.calcDaysBetweenTwoDate(date1, date2);
+        if (newHoliday <= getHolidaysLeft() && newHoliday >= 0) {
+            this.holidaysAlreadyTaken = getHolidaysAlreadyTaken() + newHoliday;
+            setHolidaysLeft();
+            System.out.println("The next vacation will last: " + newHoliday + " day(s)");
+            System.out.println("Vacation allowed! " + "Days left: " + getHolidaysLeft());
         }
-        else if (newVacation < 0) {
-            System.out.println("Vacation can't be negative number! " + "Days left: " + this.holidaysLeft);
+        else if (newHoliday < 0) {
+            System.out.println("Vacation can't be negative number! " + "Days left: " + getHolidaysLeft());
         } else {
-            System.out.println("Not enough vacation days! " + "Days left: " + this.holidaysLeft);
+            System.out.println("Not enough vacation days! " + "Days left: " + getHolidaysLeft());
+        }
+    }
+
+    // take vacation (days)
+    public void takeVacation(int newHoliday) {
+        if (newHoliday <= getHolidaysLeft() && newHoliday >= 0) {
+            this.holidaysAlreadyTaken = getHolidaysAlreadyTaken() + newHoliday;
+            setHolidaysLeft();
+            System.out.println("Vacation allowed! " + "Days left: " + getHolidaysLeft());
+        }
+        else if (newHoliday < 0) {
+            System.out.println("Vacation can't be negative number! " + "Days left: " + getHolidaysLeft());
+        } else {
+            System.out.println("Not enough vacation days! " + "Days left: " + getHolidaysLeft());
         }
     }
 
     // add additional vacation days if employee age > 50
     private int addVacationBenefits() {
         int additionalDays = 0;
-        if (setUpAge() >= 50) {
-            int yearBenefitsPlusBegin = this.dayOfBirth.y + 50;
+        if (this.age >= 50) {
+            int yearBenefitsPlusBegin = getDayOfBirth().y + 50;
             if (yearBenefitsPlusBegin < getHiringDate().y) {
                 yearBenefitsPlusBegin = getHiringDate().y;
             }
