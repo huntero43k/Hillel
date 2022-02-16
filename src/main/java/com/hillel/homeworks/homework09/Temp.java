@@ -9,5 +9,9 @@ public class Temp {
         int b = 5;
         int c = (int)(b * a);
         System.out.println(c);
+
+        Date date1 = new Date("23.02.1970");
+        System.out.println(DateCalc.calcAge(date1));
+        ;
     }
 }

@@ -10,10 +10,19 @@ import com.hillel.homeworks.homework09.utils.DateCalc;
 import java.util.*;
 
 public class Main {
+
+    /**
+     * For more convenient use of objects below,
+     * we take them out of the scope of the main method
+     */
     public static List<Employee> EMPLOYEE_LIST = new ArrayList<>();
     public static Scanner SCANNER_STR = new Scanner(System.in);
     public static Scanner SCANNER_INT = new Scanner(System.in);
 
+    /**
+     * Here start point of the program
+     * @param args command line values
+     */
     public static void main(String[] args) {
         boolean exit = false;
         while (!exit) {

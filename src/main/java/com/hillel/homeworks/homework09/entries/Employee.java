@@ -25,6 +25,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 abstract public class Employee {
 
+    /**
+     * This is fields where we will store our values
+     */
     final String name;
     final String lastname;
     final Date dayOfBirth;
@@ -35,11 +38,12 @@ abstract public class Employee {
     int age;
 
     /**
-     * This is a constructor to initialize employee's objects.
-     * @param name an initial employee name
-     * @param lastname an initial employee lastname
-     * @param dayOfBirth this is the employee's date of birth
-     * @param hiringDate this is the date of hire
+     * This is a constructor for the class inheritor.
+     * @param name set an initial employee name
+     * @param lastname set an initial employee lastname
+     * @param dayOfBirth set employee's date of birth
+     * @param hiringDate set the date of hire
+     * other variables have automatic calculating and value assignment
      */
     public Employee(String name, String lastname, Date dayOfBirth, Date hiringDate) {
         this.name = name;
@@ -57,13 +61,16 @@ abstract public class Employee {
      * Calculates the total amount of employee's vacation days
      * @param hiringDate accepted as input
      *
-     * This method calculates the total vacation days of Employee.
+     * This method calculates the total vacation days of employee.
      * The logic of the method includes 3 main points:
      * 1) The method calculates the total number of months worked by an employee, starting from
-     *                   the hiring date (the utils Class DateCalc is used for calculating);
-     * 2) Then it adds 2.5 vacation days every month (assuming 30 days per year);
+     *                   the hiring date (DateCalc.calcMonthsBetweenTwoDate() is used for calculating);
+     *                   @see DateCalc#calcMonthsBetweenTwoDate(Date) 
+     * 2) This method adds 2.5 vacation days every month (assuming 30 days per year)
+     *                   (returns an integer by using TypeCasting);
      * 3) Also adds "benefits" days, if they exist, to the total number of days,
-     *                   helper method addVacationBenefits() is used (method description below);
+     *                   @see #addVacationBenefits() - a helper method is used ;
+     *  
      */
     private void setHolidaysSum(Date hiringDate) {
         this.holidaysSum = (int)(DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5 + addVacationBenefits());
@@ -72,7 +79,7 @@ abstract public class Employee {
     /**
      * Sets the age of the employee
      * @param dayOfBirth accepted as input
-     * helper method DateCalc.calcAge() is used
+     * @see DateCalc#calcAge(Date) helper method is used
      */
     private void setAge(Date dayOfBirth) {
         this.age = DateCalc.calcAge(dayOfBirth);
@@ -87,16 +94,26 @@ abstract public class Employee {
 
     /**
      * The method calculates the number of vacation days left using known variables such as:
-     * holidaysAlreadyTaken, holidaysAlreadyTaken
+     * holidaysSum, holidaysAlreadyTaken
+     * This method returns value of int holidaysLeft
      */
     private void setHolidaysLeft() {
         this.holidaysLeft = this.holidaysSum - this.holidaysAlreadyTaken;
     }
 
     /**
-     *
-     * @param date1
-     * @param date2
+     * This method takes input data below and counts next vacation days sum using two dates.
+     * helper custom Class - Date;
+     * @param date1 first date of next vacation days range.
+     *              (example of input parameters 24.04.2021);
+     * @param date2 second date of next vacation days range.
+     *              (example of input parameters 30.04.2021);
+     * @see DateCalc#calcDaysBetweenTwoDate(Date, Date) 
+     * ■ The method also output all necessary data to notify the user about:
+     *              - next vacation information;
+     *              - holidays left (in days);
+     * ■ This method contains small checks for the negative value and exceeding the limit
+     * of the remaining vacation days.
      */
     // take vacation (Date range FROM dd.MM.yyyy - TO dd.MM.yyyy)
     public void takeVacation(Date date1, Date date2) {
@@ -104,7 +121,7 @@ abstract public class Employee {
         if (newHoliday <= getHolidaysLeft() && newHoliday >= 0) {
             this.holidaysAlreadyTaken = getHolidaysAlreadyTaken() + newHoliday;
             setHolidaysLeft();
-            System.out.println("The next vacation will last: " + newHoliday + " day(s)");
+            System.out.println("The next vacation" + date1 + "-" + date2 + " will last: " + newHoliday + " day(s)");
             System.out.println("Vacation allowed! " + "Days left: " + getHolidaysLeft());
         }
         else if (newHoliday < 0) {
@@ -114,6 +131,10 @@ abstract public class Employee {
         }
     }
 
+    /**
+     * The method is similar to the method above, except of the input data.
+     * @param newHoliday using for initialize new employee's already taken holidays
+     */
     // take vacation (days)
     public void takeVacation(int newHoliday) {
         if (newHoliday <= getHolidaysLeft() && newHoliday >= 0) {
@@ -128,25 +149,42 @@ abstract public class Employee {
         }
     }
 
-    // add additional vacation days if employee age > 50
+    /**
+     * ■ This method counts the number of additional vacation days if an employee age is 50 years or older.
+     * The starting date from which the calculation of days begins is the date 01.01.yyyy, where yyyy is the
+     * current calendar year are entitled to a holiday of 32 days per year. (add 2 benefit vacation days)
+     * @see DateCalc#calcMonthsBetweenTwoDate(Date) 
+     * ■ Small checks: to ensure that the start year of the extra days count is not less than the hire date year.
+     * ■ If the age is 50+ years old and hiring date of an employee falls on 01.01.ХХХХ ()
+     * than 2 benefit days of vacation are immediately issued.
+     * @return additionalDays value which takes part in the setHolidaysSum() method.
+     */
+    // add additional vacation days if employee age is 50+
     private int addVacationBenefits() {
         int additionalDays = 0;
         if (this.age >= 50) {
-            int yearBenefitsPlusBegin = getDayOfBirth().y + 50;
-            if (yearBenefitsPlusBegin < getHiringDate().y) {
-                yearBenefitsPlusBegin = getHiringDate().y;
+            int benefitYearStart = getDayOfBirth().y + 50;
+            if (benefitYearStart < getHiringDate().y) {
+                benefitYearStart = getHiringDate().y;
             }
-            Date ageVacationBenefits = new Date(1,1,yearBenefitsPlusBegin);
-            int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(ageVacationBenefits);
+            Date benefitDateStart = new Date(1,1,benefitYearStart);
+            int monthsWorkedAfter = DateCalc.calcMonthsBetweenTwoDate(benefitDateStart);
             for (int i = 1; i < monthsWorkedAfter; i++) {
                 if (i == 1 || i % 13 == 0) {
                     additionalDays += 2;
                 }
             }
+            if (benefitDateStart.d == getHiringDate().d && benefitDateStart.m == getHiringDate().m) {
+                additionalDays += 2;
+            }
         }
         return additionalDays;
     }
 
+    /**
+     * Overridden method toString that displays the main properties of our object in the form we need.
+     * @return display the properties of an object such as: full_name, age, vacation days left
+     */
     // display all necessary information about an employee
     public String toString() {
         return "| FULL_NAME: " + getName() + " " + getLastname() + " |"
