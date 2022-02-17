@@ -95,7 +95,7 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.println("\t" + "* ALL VACATION DAYS SUM (excluding extra days): " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new HourlyEmployee(name,lastname,dayOfBirth,hiringDate,holidaysAlreadyTaken));
@@ -113,7 +113,7 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.println("\t" + "* ALL VACATION DAYS SUM (excluding extra days): " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname, dayOfBirth, hiringDate,holidaysAlreadyTaken));
@@ -131,7 +131,7 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.println("\t" + "* ALL VACATION DAYS SUM (excluding extra days): " + holidaysPreview(hiringDate) + " days");
         System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new Manager(name, lastname, dayOfBirth, hiringDate, holidaysAlreadyTaken));
@@ -140,7 +140,7 @@ public class Main {
 
     // display sum of all vacation days (excluding 50+ years old extra days)
     public static int holidaysPreview(Date hiringDate) {
-        return (int) (DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5);
+        return (int) (DateCalc.calcMonthsBetweenTodayDate(hiringDate) * 2.5);
     }
 
     // display all employee's
