@@ -1,6 +1,22 @@
 package com.hillel.homeworks.homework09.utils;
-
+/************************************************************************************************
+ * This program can be used for dates operations calculating                                    *
+ *                                                                                              *
+ * The class contains:                                                                          *
+ * ■ Private data fields: d, m, y.                                                              *
+ * ■ Two constructors with different input types: (int d, int m, int y) and (String date)       *
+ * ■ All getters are implemented through lombok.                                                *
+ * ■ All setters are custom methods that return the result of vacation counting using input data*
+ * ■ A method named takeVacation() method is used to grant vacation and count remaining days.   *
+ * ■ A method addVacationBenefits() calc additional vacation days if employee age is > 50 years.*
+ *                                                                                              *
+ * This program takes standard employee input and returns the result of a calculation that      *
+ * provides vacation count functionality.                                                       *
+ ***********************************************************************************************/
+import lombok.Getter;
 import java.time.LocalDate;
+
+@Getter
 
 public class Date {
     final public int d;     // day

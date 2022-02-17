@@ -86,7 +86,7 @@ abstract public class Employee {
     }
 
     /**
-     * Sets the initial value to initialize the variable
+     * Sets the initial value to initialize the variable holidaysAlreadyTaken
      */
     private void setHolidaysAlreadyTaken() {
         this.holidaysAlreadyTaken = 0;
@@ -102,18 +102,18 @@ abstract public class Employee {
     }
 
     /**
-     * This method takes input data below and counts next vacation days sum using two dates.
-     * helper custom Class - Date;
-     * @param date1 first date of next vacation days range.
-     *              (example of input parameters 24.04.2021);
-     * @param date2 second date of next vacation days range.
-     *              (example of input parameters 30.04.2021);
-     * @see DateCalc#calcDaysBetweenTwoDate(Date, Date) 
-     * ■ The method also output all necessary data to notify the user about:
+     * ■ The method takes input data, using 2 dates. It counts holidays left and next vacation days sum.
+     * ■ This method return value of the remaining vacation days and outputs information to the console:
      *              - next vacation information;
      *              - holidays left (in days);
      * ■ This method contains small checks for the negative value and exceeding the limit
      * of the remaining vacation days.
+     * @see Date class that helps process the input data in date format
+     * @see DateCalc#calcDaysBetweenTwoDate(Date, Date) count all necessary data
+     * @param date1 first date of next vacation days range.
+     *              (example of input parameters 24.04.2021);
+     * @param date2 second date of next vacation days range.
+     *              (example of input parameters 30.04.2021);
      */
     // take vacation (Date range FROM dd.MM.yyyy - TO dd.MM.yyyy)
     public void takeVacation(Date date1, Date date2) {
@@ -132,8 +132,8 @@ abstract public class Employee {
     }
 
     /**
-     * The method is similar to the method above, except of the input data.
-     * @param newHoliday using for initialize new employee's already taken holidays
+     * Polymorphic method to the previous one. The only difference is the input data
+     * @param newHoliday using for initialize already taken holidays
      */
     // take vacation (days)
     public void takeVacation(int newHoliday) {
@@ -183,7 +183,7 @@ abstract public class Employee {
 
     /**
      * Overridden method toString that displays the main properties of our object in the form we need.
-     * @return display the properties of an object such as: full_name, age, vacation days left
+     * @return display the properties of an object such as: full_name, age, vacation_days_left
      */
     // display all necessary information about an employee
     public String toString() {

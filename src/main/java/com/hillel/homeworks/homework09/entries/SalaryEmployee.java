@@ -14,9 +14,9 @@ public class SalaryEmployee extends Employee{
 
     /**
      * This is fields where we will store our values:
-     *      @see #employeeType field is used to display the type of our object;
-     *      @see #annualSalary will be used in the future when methods for calculating
-     *      payroll will be described (this functionality not realized yet, so we put 0 value)
+     *      - employeeType field is used to display the type of our object;
+     *      - annualSalary will be used in the future when methods for calculating
+     * payroll will be described (this functionality is not yet implemented, so we set 0 value)
      */
     String employeeType;
     double annualSalary = 0;

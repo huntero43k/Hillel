@@ -11,18 +11,13 @@ import java.util.*;
 
 public class Main {
 
-    /**
-     * For more convenient use of objects below,
-     * we take them out of the scope of the main method
-     */
+    // For more convenient use of objects below, we take them out of the scope of the main method
     public static List<Employee> EMPLOYEE_LIST = new ArrayList<>();
     public static Scanner SCANNER_STR = new Scanner(System.in);
     public static Scanner SCANNER_INT = new Scanner(System.in);
 
-    /**
-     * Here start point of the program
-     * @param args command line values
-     */
+    // Here start point of the program
+    // creating menu loop using enum options
     public static void main(String[] args) {
         boolean exit = false;
         while (!exit) {
@@ -37,11 +32,12 @@ public class Main {
                     case CREATE -> createEmployee();
                     case DISPLAY -> displayEmployee();
                     case SEARCH -> searchEmployee();
-                    case VACATION -> takeVacation();
+                    case VACATION -> vacation();
                     case DELETE -> deleteEmployee();
                     case EXIT -> exit = true;
                 }
-            // catch exception if input value different from menu values
+                // catch exception if input value different from menu values
+                // this exception catches only integers
             } catch (IllegalArgumentException exception) {
                 print(" INPUT ERROR! Out of range encountered.");
                 System.out.print("Want to continue? Y/N: ");
@@ -71,6 +67,7 @@ public class Main {
                 }
             }
             // catch exception if input value different from menu values
+            // this exception catches only integers
             catch (IllegalArgumentException exception) {
                 print(" INPUT ERROR! Out of range encountered.");
                 System.out.print("Want to continue? Y/N: ");
@@ -87,7 +84,7 @@ public class Main {
         }
     }
 
-    // create new HourlyEmployee
+    // create new HourlyEmployee object
     public static void createHourlyEmployee() {
         System.out.println("\t" + " * CREATE NEW HOURLY EMPLOYEE ->");
         System.out.print("Enter name: ");
@@ -98,14 +95,14 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
-        System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
+        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new HourlyEmployee(name,lastname,dayOfBirth,hiringDate,holidaysAlreadyTaken));
         print(" *** Employee was created successfully! ***");
     }
 
-    // create new SalaryEmployee
+    // create new SalaryEmployee object
     public static void createSalaryEmployee() {
         System.out.println("\t" + " * CREATE NEW SALARY EMPLOYEE ->");
         System.out.print("Enter name: ");
@@ -116,14 +113,14 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
-        System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
+        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new SalaryEmployee(name, lastname, dayOfBirth, hiringDate,holidaysAlreadyTaken));
         print(" *** Employee was created successfully! ***");
     }
 
-    // create new Manager
+    // create new Manager object
     public static void createManager() {
         System.out.println("\t" + " * CREATE NEW MANAGER ->");
         System.out.print("Enter name: ");
@@ -134,20 +131,19 @@ public class Main {
         Date dayOfBirth = new Date(SCANNER_STR.nextLine());
         System.out.print("Enter hiringDate (dd.MM.yyyy): ");
         Date hiringDate = new Date(SCANNER_STR.nextLine());
-        System.out.println("\t" + "Approximate vacation days near: ~ " + holidaysPreview(hiringDate) + " days");
-        System.out.print("Enter sum of all taken holidays by " + name + " " + lastname + " : ");
+        System.out.println("\t" + "Sum of all vacation days (excluding extra days): " + holidaysPreview(hiringDate) + " days");
+        System.out.print("Enter the amount of used holiday days by " + name + " " + lastname + " : ");
         int holidaysAlreadyTaken = SCANNER_INT.nextInt();
         EMPLOYEE_LIST.add(new Manager(name, lastname, dayOfBirth, hiringDate, holidaysAlreadyTaken));
         print(" *** Employee was created successfully! ***");
     }
 
-    // ATTENTION! This is not an exact value, it is used only for convenience in user interface menu
-    // display approximate number of available vacation days (without benefits of 50+)
+    // display sum of all vacation days (excluding 50+ years old extra days)
     public static int holidaysPreview(Date hiringDate) {
         return (int) (DateCalc.calcMonthsBetweenTwoDate(hiringDate) * 2.5);
     }
 
-    // display all employees
+    // display all employee's
     public static void displayEmployee() {
         printLine();
         for (Employee employee : EMPLOYEE_LIST) {
@@ -186,7 +182,7 @@ public class Main {
     }
 
     // take vacation
-    public static void takeVacation() {
+    public static void vacation() {
         if (EMPLOYEE_LIST.size() > 0) {
             boolean found = false;
             System.out.println("\t" + "* TAKE VACATION EMPLOYEE MENU ->");
@@ -303,7 +299,7 @@ public class Main {
         }
     }
 
-    // employee type menu
+    // employee type menu list
     enum EmployeeType {
         HOURLY_EMPLOYEE(1),
         SALARY_EMPLOYEE(2),
