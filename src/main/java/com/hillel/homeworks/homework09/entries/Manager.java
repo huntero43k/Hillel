@@ -1,5 +1,9 @@
 package com.hillel.homeworks.homework09.entries;
-
+/**
+ * This Class extends from Employee and contain:
+ * ■ few additional unique fields: employeeType, profitSharing;
+ * ■ Overridden toString method
+ */
 import com.hillel.homeworks.homework09.utils.Date;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
