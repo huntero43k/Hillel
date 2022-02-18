@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int a, b, c, d, e, f;
-        int x, y;
+        double a, b, c, d, e, f;
+        double x, y;
 
         a = scanner.nextInt();
         b = scanner.nextInt();
