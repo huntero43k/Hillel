@@ -1,5 +1,4 @@
 package com.hillel.homeworks.homework07.task14;
-// 0 -1, -1 0, 0 0
 import java.util.Scanner;
 
 public class Main {
@@ -7,15 +6,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         double x = scanner.nextDouble();
         double y = scanner.nextDouble();
-        if (isPointInSquare(x,y)) {
-            System.out.println("YES");
-        } else {
-            System.out.println("NO");
-        }
+        String result = isPointInSquare(x, y) ? "YES" : "NO";
+        System.out.println(result);
     }
 
     public static boolean isPointInSquare(double x, double y) {
-        return (x * x + y * y <= Math.pow(2, (1 / 2)));
+        return (Math.abs(x) <= 1 && Math.abs(y) <= 1);
     }
 
 }
